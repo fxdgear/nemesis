@@ -1,0 +1,31 @@
+import os
+from nemesis import Nemesis
+from elasticsearch import Elasticsearch
+
+# Please make sure you've exported the following ENV vars: CLOUD_AUTH, CLOUD_ID before
+# running `nemesis preview` or `nemesis launch`.
+
+CLOUD_ID = os.environ.get("CLOUD_ID")
+USERNAME, PASSWORD = os.environ.get("CLOUD_AUTH").split(":")
+
+# if you aren't using cloud and instead just have an elasticsearch URL you can instantiate
+# nemesis using `es_host` instead.
+
+n = Nemesis(USERNAME, PASSWORD, cloud_id=CLOUD_ID)
+
+#####
+# # Now that Nemesis has been created, lets import some resources and make something
+#
+# from nemesis.resources.elasticsearch.ingest_pipeline import IngestPipeline
+#
+# ip = IngestPipeline(
+#    id="some-id",
+#    description="a nicely written description",
+#    processors = [< a list of processors>],
+#  )
+#
+# n.register(ip)
+#
+# # Now you can save this file and run `nemesis preview` to see what will be deployed.
+# # And then run `nemesis launch` to actually deploy the resource into Elasticsearch.
+#####

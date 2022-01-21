@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "nemesis"
+version = "0.0.7"
+description = "Tool for managing Elasticsearch resources as code"
+authors = ["Infra <infra@elastic.co>"]
+include = ["nemesis/templates/*.tmpl"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Click = "~7.1"
+marshmallow = "^3.14.1"
+dacite = "^1.6.0"
+deepdiff = "^5.6.0"
+elasticsearch = "^7.15.2"
+python-dateutil = "^2.8.2"
+rich = "^10.14.0"
+requests = "^2.26.0"
+
+[tool.poetry.dev-dependencies]
+black = "~21.7b0"
+flake8 = "~3.9.2"
+mypy = "~0.910"
+pytest = "~6.2.4"
+pytest-watch = "~4.2.0"
+ipdb = "^0.13.9"
+
+[tool.poetry.scripts]
+nemesis = 'nemesis.scripts.nemesis:cli'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
