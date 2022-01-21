@@ -5,6 +5,7 @@ import dacite
 from dataclasses import dataclass, field
 from typing import Optional
 from elasticsearch import NotFoundError
+from nemesis.exceptions import MultipleObjectsReturned
 from nemesis.resources import enforce_types, BaseResource
 from nemesis.resources.elasticsearch.alias import Alias
 from nemesis.schemas.elasticsearch.index_template import IndexTemplateSchema
@@ -54,13 +55,13 @@ class IndexTemplate(BaseResource):
         data = rt["index_templates"]
         ret = []
 
+        schema = IndexTemplateSchema()
         for item in data:
-            schema = IndexTemplateSchema()
             result = schema.load(item)
             template = dacite.from_dict(data_class=cls, data=result)
             ret.append(template)
         if len(ret) > 1:
-            return ret
+            raise MultipleObjectsReturned
         else:
             return ret[0]
 
@@ -73,15 +74,12 @@ class IndexTemplate(BaseResource):
             raise e
 
     def update(self, client):
-        print(f"Updating {self}...")
-        return None
         try:
             return client.indices.put_index_template(
                 self.name, self.asdict(), create=False
             )
         except Exception as e:
             raise e
-        print("Finished.")
 
     def delete(self, client):
         try:
@@ -89,5 +87,3 @@ class IndexTemplate(BaseResource):
         except Exception as e:
             raise e
 
-    def create_or_update(self, client):
-        self.update(client)
