@@ -93,7 +93,7 @@ class Diff:
                         {
                             "path": path,
                             "long": f"[remove]+[/remove] {json.dumps(item.t2, indent=2)}",
-                            "short": f"[remove]+[/] {remove}",
+                            "short": f"[remove]+[/] {path}",
                         }
                     )
                     self.deltas.append(f"[remove]-[/] {path}")
