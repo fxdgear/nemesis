@@ -21,7 +21,7 @@ class RetentionPolicyTimeSchema(Schema):
 
 
 class RetentionPolicySchema(Schema):
-    time = fields.Nested(RetentionPolicyTimeSchema, load_from="time")
+    time = fields.Nested(RetentionPolicyTimeSchema, data_key="time")
 
 
 class SettingsSchema(Schema):
@@ -50,18 +50,18 @@ class DestSchema(Schema):
 class SourceSchema(Schema):
     index = fields.List(fields.Str())
     runtime_mappings = fields.Dict()
-    query = fields.Nested(QueryDSLSchema(), load_from="query")
+    query = fields.Nested(QueryDSLSchema(), data_key="query")
 
 
 class TransformSchema(Schema):
     # fmt: off
-    source = fields.Nested(SourceSchema, load_from="source")
-    dest = fields.Nested(DestSchema, load_from="dest")
-    pivot = fields.Nested(PivotSchema, load_from="pivot")
-    latest = fields.Nested(LatestSchema, load_from="latest")
-    sync = fields.Nested(SyncSchema, load_from="sync")
-    retention_policy = fields.Nested(RetentionPolicySchema, load_from="retention_policy")
-    settings = fields.Nested(SettingsSchema, load_from="settings", allow_none=True)
+    source = fields.Nested(SourceSchema, data_key="source")
+    dest = fields.Nested(DestSchema, data_key="dest")
+    pivot = fields.Nested(PivotSchema, data_key="pivot")
+    latest = fields.Nested(LatestSchema, data_key="latest")
+    sync = fields.Nested(SyncSchema, data_key="sync")
+    retention_policy = fields.Nested(RetentionPolicySchema, data_key="retention_policy")
+    settings = fields.Nested(SettingsSchema, data_key="settings", allow_none=True)
     description = fields.Str()
     frequency = fields.Str()
     version = fields.Str()

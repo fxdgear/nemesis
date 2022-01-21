@@ -16,18 +16,18 @@ class IndexSchema(Schema):
     field_security = fields.Dict()
     names = fields.List(fields.Str())
     privileges = fields.List(fields.Str())
-    query = fields.Nested(QueryDSLSchema, load_from="query")
+    query = fields.Nested(QueryDSLSchema, data_key="query")
     allow_restricted_indices = fields.Bool()
 
 
 class RoleSchema(Schema):
     name = fields.Str()
     applications = fields.List(
-        fields.Nested(ApplicationSchema, load_from="applications")
+        fields.Nested(ApplicationSchema, data_key="applications")
     )
     cluster = fields.List(fields.Str())
-    _global = fields.Dict(load_from="global")
-    indices = fields.List(fields.Nested(IndexSchema, load_from="indices"))
+    _global = fields.Dict(data_key="global")
+    indices = fields.List(fields.Nested(IndexSchema, data_key="indices"))
     metadata = fields.Dict()
     run_as = fields.List(fields.Str())
 

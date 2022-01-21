@@ -11,7 +11,7 @@ class IngestPipelineSchema(Schema):
     description = fields.Str()
     on_failure = fields.List(fields.Dict())
     version = fields.Int()
-    meta = fields.Dict(load_from="_meta")
+    meta = fields.Dict(data_key="_meta")
     id = fields.Str()
 
     @pre_load(pass_many=True)

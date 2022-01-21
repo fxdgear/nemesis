@@ -9,7 +9,7 @@ from nemesis.schemas.elasticsearch.alias import AliasSchema
 class TemplateSchema(Schema):
     settings = fields.Dict()
     mappings = fields.Dict()
-    alises = fields.Nested(AliasSchema(), load_from="aliases")
+    alises = fields.Nested(AliasSchema(), data_key="aliases")
 
 
 class IndexTemplateSchema(Schema):
@@ -19,7 +19,7 @@ class IndexTemplateSchema(Schema):
     priority = fields.Int()
     composed_of = fields.List(fields.Str(), allow_none=True)
     version = fields.Int()
-    meta = fields.Dict(load_from="_meta")
+    meta = fields.Dict(data_key="_meta")
     name = fields.Str()
 
     def _remove_empty_values(self, data):

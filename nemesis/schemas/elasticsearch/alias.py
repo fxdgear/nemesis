@@ -6,7 +6,7 @@ from nemesis.schemas.elasticsearch.querydsl import QueryDSLSchema
 
 
 class AliasSchema(Schema):
-    filter = fields.Nested(QueryDSLSchema(), load_from="filter")
+    filter = fields.Nested(QueryDSLSchema(), data_key="filter")
     index_routing = fields.Str()
     is_hidden = fields.Bool()
     is_write_index = fields.Bool()
