@@ -106,7 +106,7 @@ class Transform(BaseResource):
             raise TypeError("Value needed for `latest` or `pivot` field")
 
     def put(self, client):
-        client.transforms.put(transform_id=self.id, transform_body=self.asdict()))
+        client.transforms.put(transform_id=self.id, transform_body=self.asdict())
 
     @classmethod
     def get(cls, client, transform_id):
