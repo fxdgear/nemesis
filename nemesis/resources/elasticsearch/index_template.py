@@ -67,23 +67,19 @@ class IndexTemplate(BaseResource):
 
     def create(self, client):
         try:
-            return client.indices.put_index_template(
-                self.name, self.asdict(), create=True
-            )
+            return client.indices.put_index_template(name=self.name, body=self.asdict(), create=True)
         except Exception as e:
             raise e
 
     def update(self, client):
         try:
-            return client.indices.put_index_template(
-                self.name, self.asdict(), create=False
-            )
+            return client.indices.put_index_template(name=self.name, body=self.asdict(), create=False)
         except Exception as e:
             raise e
 
     def delete(self, client):
         try:
-            return client.indices.delete_index_template(self.name)
+            return client.indices.delete_index_template(name=self.name)
         except Exception as e:
             raise e
 
