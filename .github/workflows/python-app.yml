@@ -36,5 +36,6 @@ jobs:
         docker-compose up -d
     - name: Test with pytest
       run: |
+        ./wait-for-healthy-container.sh nemesis_elasticsearch_1
         poetry run pytest
 
