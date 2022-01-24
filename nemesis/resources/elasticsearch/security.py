@@ -21,11 +21,11 @@ class Application(BaseResource):
 @enforce_types
 @dataclass(frozen=True)
 class Index(BaseResource):
-    field_security: dict
     names: list
     privileges: list
-    query: QueryDSL
-    allow_restricted_indices: Optional[bool] = False
+    query: Optional[QueryDSL] = None
+    field_security: Optional[dict] = None
+    allow_restricted_indices: Optional[bool] = None
 
 
 @enforce_types
@@ -36,12 +36,21 @@ class Role(BaseResource):
     cluster: list
     indices: list[Index]
     metadata: dict
-    run_as: list
+    run_as: Optional[list] = None
     _global: Optional[dict] = None
 
     @property
     def id(self):
         return self.name
+
+    def asdict(self):
+        """
+        The "name" field isn't part of the actual body sent to Elasticsearch.
+        But it's nice to have on the object we are dealing with.
+        """
+        d = super().asdict()
+        d.pop("name")
+        return d
 
     @classmethod
     def get(cls, client, name):
@@ -60,16 +69,19 @@ class Role(BaseResource):
 
     def create(self, client):
         body = self.asdict()
-        body.pop("name")
         try:
             return client.security.put_role(name=self.id, body=body)
         except Exception as e:
             raise e
 
     def update(self, client):
-        print(f"Updating {self}...")
-        self.create(client)
-        print("Finished.")
+        return self.create(client)
+
+    def delete(self, client):
+        try:
+            return client.security.delete_role(name=self.id)
+        except Exception as e:
+            raise e
 
 
 @enforce_types
@@ -81,6 +93,15 @@ class RoleMapping(BaseResource):
     roles: Optional[list] = None
     role_templates: Optional[list] = None
     metadata: Optional[dict] = None
+
+    def asdict(self):
+        """
+        The "name" field isn't part of the actual body sent to Elasticsearch.
+        But it's nice to have on the object we are dealing with.
+        """
+        d = super().asdict()
+        d.pop("name")
+        return d
 
     @property
     def id(self):
@@ -109,13 +130,17 @@ class RoleMapping(BaseResource):
 
     def create(self, client):
         body = self.asdict()
-        body.pop("name")
         try:
             return client.security.put_role_mapping(name=self.id, body=body)
         except Exception as e:
             raise e
 
     def update(self, client):
-        print(f"Updating {self}...")
-        self.create(client)
-        print("Finished.")
+        return self.create(client)
+
+    def delete(self, client):
+        body = self.asdict()
+        try:
+            return client.security.delete_role_mapping(name=self.id)
+        except Exception as e:
+            raise e

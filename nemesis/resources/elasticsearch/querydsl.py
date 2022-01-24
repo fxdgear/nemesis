@@ -11,6 +11,7 @@ from nemesis.resources import enforce_types, BaseResource
 @enforce_types
 @dataclass(frozen=True)
 class QueryDSL(BaseResource):
+    id: Optional[str] = None
     bool: Optional[dict] = None
     boolstring: Optional[dict] = None
     common: Optional[dict] = None
@@ -49,3 +50,12 @@ class QueryDSL(BaseResource):
     span_within: Optional[dict] = None
     wildcard: Optional[dict] = None
     wrapper: Optional[dict] = None
+
+    def asdict(self):
+        """
+        The "id" field isn't part of the actual body sent to Elasticsearch.
+        But it's nice to have on the object we are dealing with.
+        """
+        d = super().asdict()
+        d.pop("id")
+        return d
