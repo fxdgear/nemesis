@@ -48,12 +48,9 @@ class IngestPipeline(BaseResource):
             raise e
 
     def update(self, client):
-        print(f"Updating {self}...")
-        self.create(client)
-        print("Finished.")
+        return self.create(client)
 
     def simulate(self, client, docs):
-        print(f"Simulating pipeline {self}")
         pipeline = self.asdict()
         pipeline.pop("id")
         body = {"pipeline": pipeline, "docs": docs}
