@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import pytest
+from dataclasses import FrozenInstanceError
 from nemesis.resources.elasticsearch.index_template import IndexTemplate, Template
 from elasticsearch import Elasticsearch, RequestError
 
@@ -18,6 +16,7 @@ def template():
         index_patterns=["test-foo"],
         template=Template(settings={"number_of_replicas": 2}, mappings={}),
     )
+
 
 def test_asdict(template):
     """
@@ -34,8 +33,14 @@ def test_asdict(template):
     }
 
 
+def test_frozen_object(template):
+    with pytest.raises(FrozenInstanceError):
+        template.index_patterns = ["raise-error"]
+
+
 def test_id(template):
     assert template.id == "test-template"
+
 
 def test_create_update_delete(template, es_client):
     result = template.create(es_client)

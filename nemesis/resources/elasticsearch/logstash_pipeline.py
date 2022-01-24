@@ -52,6 +52,7 @@ class LogstashPipeline(BaseResource):
     def create(self, client):
         body = self.asdict()
         body.pop("id")
+
         try:
             return client.logstash.put_pipeline(id=self.id, body=body)
         except Exception as e:
@@ -64,6 +65,4 @@ class LogstashPipeline(BaseResource):
             raise e
 
     def update(self, client):
-        print(f"Updating {self}...")
-        self.create(client)
-        print("Finished.")
+        return self.create(client)
