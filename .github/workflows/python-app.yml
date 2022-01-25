@@ -37,5 +37,6 @@ jobs:
     - name: Test with pytest
       run: |
         ./wait-for-healthy-container.sh nemesis_elasticsearch_1
+        curl -X POST -u "elastic:changeme" "http://localhost:9200/_license/start_trial?acknowledge=true"
         poetry run pytest
 
