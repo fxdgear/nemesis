@@ -35,7 +35,6 @@ class Latest(BaseResource):
 class Pivot(BaseResource):
     aggregations: dict
     group_by: dict
-    max_page_search_size: int = 500
 
 
 @enforce_types
@@ -132,7 +131,6 @@ class Transform(BaseResource):
             return ret[0]
 
     def create(self, client, defer_validation=False, *args, **kwargs):
-        print(f"Creating {self}.")
         try:
             ret = client.transform.put_transform(
                 transform_id=self.id,
@@ -147,7 +145,6 @@ class Transform(BaseResource):
         return ret
 
     def delete(self, client, force=False, *args, **kwargs):
-        print(f"Deleting {self}.")
         try:
             return client.transform.delete_transform(
                 transform_id=self.id, force=force, *args, **kwargs
@@ -166,7 +163,6 @@ class Transform(BaseResource):
         *args,
         **kwargs,
     ):
-        print(f"Stopping {self}")
         try:
             return client.transform.stop_transform(
                 transform_id=self.id,
@@ -182,7 +178,6 @@ class Transform(BaseResource):
             raise e
 
     def start(self, client, timeout="30s", *args, **kwargs):
-        print(f"Starting {self}")
         try:
             return client.transform.start_transform(
                 transform_id=self.id, timeout=timeout, *args, **kwargs

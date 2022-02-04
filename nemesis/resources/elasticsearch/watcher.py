@@ -8,6 +8,7 @@ from typing import Optional, Union
 from nemesis.resources import enforce_types, BaseResource
 from nemesis.schemas.elasticsearch.watcher import WatchSchema
 from nemesis.resources.elasticsearch.querydsl import QueryDSL
+from elasticsearch import NotFoundError
 
 
 @enforce_types
@@ -133,7 +134,7 @@ class Watch(BaseResource):
     input: Input
     condition: Condition
     actions: dict
-    metadata: dict
+    metadata: Optional[dict] = None
     throttle_period: Optional[int] = None
     throttle_period_in_millis: Optional[int] = None
 
@@ -141,33 +142,41 @@ class Watch(BaseResource):
     def id(self):
         return self.watch_id
 
+    def asdict(self):
+        d = super().asdict()
+        d.pop("watch_id")
+        return d
+
     @classmethod
     def get(cls, client, watch_id):
         """
         Get a watch from Elasticsearch
         """
-        rt = client.watcher.get_watch(id=watch_id)
+        try:
+            rt = client.watcher.get_watch(id=watch_id)
+        except NotFoundError:
+            return None
         schema = WatchSchema()
         try:
             result = schema.load(rt)
         except ValidationError as e:
-            print(e)
             raise e
         except TypeError as e:
-            print(e)
             raise e
         role = dacite.from_dict(data_class=cls, data=result)
         return role
 
     def create(self, client):
-        body = self.asdict()
-        body.pop("watch_id")
         try:
-            return client.watcher.put_watch(self.id, body=body)
+            return client.watcher.put_watch(id=self.id, body=self.asdict())
+        except Exception as e:
+            raise e
+
+    def delete(self, client):
+        try:
+            return client.watcher.delete_watch(id=self.id)
         except Exception as e:
             raise e
 
     def update(self, client):
-        print(f"Updating {self}...")
-        self.create(client)
-        print("Finished.")
+        return self.create(client)

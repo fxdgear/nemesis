@@ -10,7 +10,7 @@ from nemesis.schemas.elasticsearch.ingest_pipeline import IngestPipelineSchema
 
 class SyncTimeSchema(Schema):
     field = fields.Str()
-    delay = fields.Str(default="60s")
+    delay = fields.Str(dump_default="60s")
 
 
 class SyncSchema(Schema):
@@ -27,10 +27,10 @@ class RetentionPolicySchema(Schema):
 
 
 class SettingsSchema(Schema):
-    dates_as_epoc_millis = fields.Boolean(default=False)
+    dates_as_epoc_millis = fields.Boolean(dump_default=False)
     docs_per_second = fields.Float()
-    align_checkpoints = fields.Boolean(default=True)
-    max_page_search_size = fields.Integer(default=500)
+    align_checkpoints = fields.Boolean(dump_default=True)
+    max_page_search_size = fields.Integer(dump_default=500)
 
 
 class LatestSchema(Schema):
@@ -41,7 +41,6 @@ class LatestSchema(Schema):
 class PivotSchema(Schema):
     aggregations = fields.Dict()
     group_by = fields.Dict()
-    max_page_search_size = fields.Integer(default=500)
 
 
 class DestSchema(Schema):

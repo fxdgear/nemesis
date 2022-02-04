@@ -118,7 +118,6 @@ def test_asdict(transform):
         "pivot": {
             "aggregations": {"max_price": {"max": {"field": "taxful_total_price"}}},
             "group_by": {"customer_id": {"terms": {"field": "customer_id"}}},
-            "max_page_search_size": 500,
         },
         "sync": {"time": {"field": "order_date", "delay": "60s"}},
         "retention_policy": {"time": {"field": "order_date", "max_age": "30d"}},

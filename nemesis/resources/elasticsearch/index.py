@@ -33,11 +33,12 @@ class Index(BaseResource):
         return d
 
     def create(self, client, defer_validation=False, *args, **kwargs):
-        print(f"Creating {self}.")
         try:
             return client.indices.create(
                 index=self.id,
-                body=self.asdict(),
+                mappings=self.asdict().get("mappings"),
+                settings=self.asdict().get("settings"),
+                aliases=self.asdict().get("aliases"),
                 *args,
                 **kwargs,
             )
@@ -46,6 +47,6 @@ class Index(BaseResource):
 
     def delete(self, client):
         try:
-            return client.indices.delete(self.id)
+            return client.indices.delete(index=self.id)
         except RequestError as e:
             raise e

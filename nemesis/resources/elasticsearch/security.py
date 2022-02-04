@@ -62,7 +62,6 @@ class Role(BaseResource):
         try:
             result = schema.load(rt)
         except ValidationError as e:
-            print(e)
             raise e
         role = dacite.from_dict(data_class=cls, data=result)
         return role
@@ -123,7 +122,6 @@ class RoleMapping(BaseResource):
         try:
             result = schema.load(rt)
         except ValidationError as e:
-            print(e)
             raise e
         role = dacite.from_dict(data_class=cls, data=result)
         return role
