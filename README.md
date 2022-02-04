@@ -1,4 +1,4 @@
-# Nemesis
+# Nemesis ![tests-badge](https://github.com/fxdgear/nemesis/actions/workflows/python-app.yml/badge.svg)
 
 Nemesis is a python library to manage Elasticsearch resources as code. Nemesis operates
 a lot more like Pulumi than terraform. Each resource that nemesis supports is an actual
