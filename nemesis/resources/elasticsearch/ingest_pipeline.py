@@ -36,10 +36,7 @@ class IngestPipeline(BaseResource):
     def create(self, client):
         body = self.asdict()
         body.pop("id")
-        try:
-            return client.ingest.put_pipeline(id=self.id, body=body)
-        except Exception as e:
-            raise e
+        return client.ingest.put_pipeline(id=self.id, body=body)
 
     def delete(self, client):
         try:

@@ -13,8 +13,14 @@ from nemesis.schemas.elasticsearch.index_template import IndexTemplateSchema
 
 @enforce_types
 @dataclass(frozen=True)
+class IndexSettings(BaseResource):
+    index: Optional[dict] = None
+
+
+@enforce_types
+@dataclass(frozen=True)
 class Template(BaseResource):
-    settings: Optional[dict] = None
+    settings: Optional[IndexSettings] = None
     mappings: Optional[dict] = None
     aliases: Optional[Alias] = None
 
@@ -49,7 +55,7 @@ class IndexTemplate(BaseResource):
         Get an index template from Elasticsearch
         """
         try:
-            rt = client.indices.get_index_template(name=name)
+            rt = client.indices.get_index_template(name=name, flat_settings=False)
         except NotFoundError:
             return None
         data = rt["index_templates"]
@@ -67,13 +73,17 @@ class IndexTemplate(BaseResource):
 
     def create(self, client):
         try:
-            return client.indices.put_index_template(name=self.name, body=self.asdict(), create=True)
+            return client.indices.put_index_template(
+                name=self.name, body=self.asdict(), create=True
+            )
         except Exception as e:
             raise e
 
     def update(self, client):
         try:
-            return client.indices.put_index_template(name=self.name, body=self.asdict(), create=False)
+            return client.indices.put_index_template(
+                name=self.name, body=self.asdict(), create=False
+            )
         except Exception as e:
             raise e
 
@@ -82,4 +92,3 @@ class IndexTemplate(BaseResource):
             return client.indices.delete_index_template(name=self.name)
         except Exception as e:
             raise e
-

@@ -6,10 +6,14 @@ from nemesis.schemas.elasticsearch.querydsl import QueryDSLSchema
 from nemesis.schemas.elasticsearch.alias import AliasSchema
 
 
+class IndexSettings(Schema):
+    index = fields.Dict()
+
+
 class TemplateSchema(Schema):
-    settings = fields.Dict()
+    settings = fields.Nested(IndexSettings(), data_key="settings")
     mappings = fields.Dict()
-    alises = fields.Nested(AliasSchema(), data_key="aliases")
+    aliases = fields.Nested(AliasSchema(), data_key="aliases")
 
 
 class IndexTemplateSchema(Schema):

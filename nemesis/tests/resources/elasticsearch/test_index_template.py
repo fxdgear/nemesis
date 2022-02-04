@@ -3,19 +3,48 @@
 
 import pytest
 from dataclasses import FrozenInstanceError
-from nemesis.resources.elasticsearch.index_template import IndexTemplate, Template
-from elasticsearch import Elasticsearch, RequestError
-
+from nemesis.resources.elasticsearch.index_template import (
+    IndexTemplate,
+    Template,
+    IndexSettings,
+)
+from elasticsearch import Elasticsearch, RequestError, NotFoundError
+from nemesis.exceptions import MultipleObjectsReturned
 from nemesis.tests import es_client, nemesis_client
 
 
 @pytest.fixture
-def template():
-    return IndexTemplate(
+def template(es_client):
+    template = IndexTemplate(
         name="test-template",
         index_patterns=["test-foo"],
-        template=Template(settings={"number_of_replicas": 2}, mappings={}),
+        template=Template(
+            settings=IndexSettings(index={"number_of_replicas": "2"}),
+        ),
     )
+    yield template
+    # clear remote resources if they exist
+    try:
+        result = template.delete(es_client)
+        assert result == {"acknowledged": True}
+    except NotFoundError:
+        pass
+
+
+@pytest.fixture
+def template2(es_client):
+    template = IndexTemplate(
+        name="test-template-2",
+        index_patterns=["test-bar"],
+        template=Template(settings=IndexSettings(index={"number_of_replicas": 2})),
+    )
+    yield template
+    # clear remote resources if they exist
+    try:
+        result = template.delete(es_client)
+        assert result == {"acknowledged": True}
+    except NotFoundError:
+        pass
 
 
 def test_asdict(template):
@@ -27,8 +56,7 @@ def test_asdict(template):
     assert template.asdict() == {
         "index_patterns": ["test-foo"],
         "template": {
-            "settings": {"number_of_replicas": 2},
-            "mappings": {},
+            "settings": {"index": {"number_of_replicas": "2"}},
         },
     }
 
@@ -42,9 +70,25 @@ def test_id(template):
     assert template.id == "test-template"
 
 
-def test_create_update_delete(template, es_client):
+def test_get_multiple(template, template2, es_client):
     result = template.create(es_client)
     assert result == {"acknowledged": True}
+
+    result = template2.create(es_client)
+    assert result == {"acknowledged": True}
+
+    with pytest.raises(MultipleObjectsReturned):
+        IndexTemplate.get(es_client, "test-template*")
+
+
+def test_create_get_update_delete(template, es_client):
+    assert IndexTemplate.get(es_client, template.id) is None
+
+    result = template.create(es_client)
+    assert result == {"acknowledged": True}
+
+    result = IndexTemplate.get(es_client, template.id)
+    assert result.asdict() == template.asdict()
 
     with pytest.raises(RequestError):
         result = template.create(es_client)
