@@ -48,6 +48,7 @@ class QueryDSL(BaseResource):
     span_or: Optional[dict] = None
     span_term: Optional[dict] = None
     span_within: Optional[dict] = None
+    term: Optional[dict] = None
     wildcard: Optional[dict] = None
     wrapper: Optional[dict] = None
 

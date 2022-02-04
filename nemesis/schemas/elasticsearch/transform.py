@@ -4,6 +4,8 @@
 import datetime
 from marshmallow import Schema, fields, pre_load
 from nemesis.schemas.elasticsearch.querydsl import QueryDSLSchema
+from nemesis.schemas.elasticsearch.index import IndexSchema
+from nemesis.schemas.elasticsearch.ingest_pipeline import IngestPipelineSchema
 
 
 class SyncTimeSchema(Schema):

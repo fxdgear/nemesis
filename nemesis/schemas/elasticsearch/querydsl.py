@@ -41,5 +41,6 @@ class QueryDSLSchema(Schema):
     span_or = fields.Dict()
     span_term = fields.Dict()
     span_within = fields.Dict()
+    term = fields.Dict()
     wildcard = fields.Dict()
     wrapper = fields.Dict()

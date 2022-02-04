@@ -4,14 +4,11 @@
 from marshmallow import Schema, fields, pre_load
 from nemesis.schemas.elasticsearch.querydsl import QueryDSLSchema
 from nemesis.schemas.elasticsearch.alias import AliasSchema
-
-
-class IndexSettings(Schema):
-    index = fields.Dict()
+from nemesis.schemas.elasticsearch.index import IndexSettingsSchema
 
 
 class TemplateSchema(Schema):
-    settings = fields.Nested(IndexSettings(), data_key="settings")
+    settings = fields.Nested(IndexSettingsSchema(), data_key="settings")
     mappings = fields.Dict()
     aliases = fields.Nested(AliasSchema(), data_key="aliases")
 

@@ -12,13 +12,15 @@ from dataclasses import dataclass, field, asdict
 from nemesis.resources import enforce_types, BaseResource
 from nemesis.resources.elasticsearch.querydsl import QueryDSL
 from nemesis.schemas.elasticsearch.transform import TransformSchema
+from nemesis.resources.elasticsearch.index import Index
+from nemesis.resources.elasticsearch.ingest_pipeline import IngestPipeline
 
 
 @enforce_types
 @dataclass(frozen=True)
 class Dest(BaseResource):
     index: str
-    pipeline: Optional[str]
+    pipeline: Optional[str] = None
 
 
 @enforce_types
@@ -80,8 +82,8 @@ class Source(BaseResource):
     """
 
     index: list
-    runtime_mappings: Optional[dict]
-    query: Optional[QueryDSL]
+    runtime_mappings: Optional[dict] = None
+    query: Optional[QueryDSL] = None
 
 
 @dataclass(repr=False, frozen=True)
@@ -105,8 +107,11 @@ class Transform(BaseResource):
         if self.pivot is None and self.latest is None:
             raise TypeError("Value needed for `latest` or `pivot` field")
 
-    def put(self, client):
-        client.transforms.put(transform_id=self.id, transform_body=self.asdict())
+    @classmethod
+    def fromdict(cls, body):
+        schema = TransformSchema()
+        result = schema.load(body)
+        return dacite.from_dict(data_class=cls, data=result)
 
     @classmethod
     def get(cls, client, transform_id):
@@ -120,10 +125,7 @@ class Transform(BaseResource):
         transforms = rt["transforms"]
         ret = []
         for transform in transforms:
-            schema = TransformSchema()
-            result = schema.load(transform)
-            transform = dacite.from_dict(data_class=cls, data=result)
-            ret.append(transform)
+            ret.append(cls.fromdict(transform))
         if len(ret) > 1:
             return ret
         else:
@@ -132,7 +134,7 @@ class Transform(BaseResource):
     def create(self, client, defer_validation=False, *args, **kwargs):
         print(f"Creating {self}.")
         try:
-            return client.transform.put_transform(
+            ret = client.transform.put_transform(
                 transform_id=self.id,
                 body=self.asdict(),
                 defer_validation=defer_validation,
@@ -142,6 +144,7 @@ class Transform(BaseResource):
             )
         except RequestError as e:
             raise e
+        return ret
 
     def delete(self, client, force=False, *args, **kwargs):
         print(f"Deleting {self}.")
@@ -188,5 +191,4 @@ class Transform(BaseResource):
             raise e
 
     def update(self, client, *args, **kwargs):
-        self.create(client)
-        print("Finished updating")
+        return self.create(client)
