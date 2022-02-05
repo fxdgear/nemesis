@@ -107,12 +107,6 @@ class Transform(BaseResource):
             raise TypeError("Value needed for `latest` or `pivot` field")
 
     @classmethod
-    def fromdict(cls, body):
-        schema = TransformSchema()
-        result = schema.load(body)
-        return dacite.from_dict(data_class=cls, data=result)
-
-    @classmethod
     def get(cls, client, transform_id):
         """
         Get a transform from Elasticsearch
@@ -124,7 +118,7 @@ class Transform(BaseResource):
         transforms = rt["transforms"]
         ret = []
         for transform in transforms:
-            ret.append(cls.fromdict(transform))
+            ret.append(cls.fromdict(schemaclass=TransformSchema, body=transform))
         if len(ret) > 1:
             return ret
         else:

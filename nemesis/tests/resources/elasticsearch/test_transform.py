@@ -19,6 +19,7 @@ from nemesis.resources.elasticsearch.transform import (
 from elasticsearch import Elasticsearch, RequestError, NotFoundError
 from nemesis.tests.resources.elasticsearch.test_ingest_pipeline import pipeline
 from nemesis.tests import es_client, nemesis_client
+from nemesis.schemas.elasticsearch.transform import TransformSchema
 
 
 @pytest.fixture
@@ -188,7 +189,7 @@ def test_create_update_delete(transform, dest_index, source_index, pipeline, es_
 
     t = transform.asdict()
     t["description"] = "change me"
-    new_transform = Transform.fromdict(t)
+    new_transform = Transform.fromdict(schemaclass=TransformSchema, body=t)
 
     with pytest.raises(RequestError):
         new_transform.update(es_client)

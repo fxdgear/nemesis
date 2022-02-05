@@ -8,9 +8,13 @@ from nemesis.resources import enforce_types, BaseResource
 from nemesis.resources.elasticsearch.querydsl import QueryDSL
 from nemesis.resources.elasticsearch.alias import Alias
 
-from elasticsearch import RequestError
+from nemesis.schemas.elasticsearch.index import IndexSchema
+
+from elasticsearch import RequestError, NotFoundError
 
 
+@enforce_types
+@dataclass(frozen=True)
 class IndexSettings(BaseResource):
     index: Optional[dict] = None
 
@@ -31,6 +35,18 @@ class Index(BaseResource):
         d = super().asdict()
         d.pop("name")
         return d
+
+    @classmethod
+    def get(cls, client, name):
+        """
+        Get an index from Elasticsearch
+        """
+        try:
+            rt = client.indices.get(index=name)
+        except NotFoundError:
+            return None
+        ret = cls.fromdict(schemaclass=IndexSchema, body=rt)
+        return ret
 
     def create(self, client, defer_validation=False, *args, **kwargs):
         try:

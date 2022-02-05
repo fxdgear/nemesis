@@ -4,6 +4,7 @@
 import json
 import inspect
 import typing
+import dacite
 from deepdiff import DeepDiff
 from contextlib import suppress
 from functools import wraps
@@ -73,6 +74,12 @@ class BaseResource:
 
     def to_json(self):
         return json.dumps(self.asdict(), indent=4)
+
+    @classmethod
+    def fromdict(cls, schemaclass, body):
+        schema = schemaclass()
+        result = schema.load(body)
+        return dacite.from_dict(data_class=cls, data=result)
 
     @property
     def stack_type(self):
