@@ -4,8 +4,8 @@ version = "0.0.8"
 description = "Tool for managing Elasticsearch resources as code"
 authors = ["Nick Lang <nick@nicklang.com>"]
 include = ["nemesis/templates/*.tmpl"]
-readme=README.md
-homepage="https://github.com/fxdgear/nemesis"
+readme = "README.md"
+homepage = "https://github.com/fxdgear/nemesis"
 
 [tool.poetry.dependencies]
 python = "^3.9"
