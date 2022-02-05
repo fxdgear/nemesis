@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "nemesis"
-version = "0.0.7"
+version = "0.0.8"
 description = "Tool for managing Elasticsearch resources as code"
-authors = ["Infra <infra@elastic.co>"]
+authors = ["Nick Lang <nick@nicklang.com>"]
 include = ["nemesis/templates/*.tmpl"]
 
 [tool.poetry.dependencies]
