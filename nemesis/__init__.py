@@ -12,6 +12,21 @@ from nemesis.utils import Diff
 
 
 class Nemesis:
+    """
+    Nemesis is our main class for which the whole project revolves around.
+
+    Parameters
+    ----------
+    username
+        username (required) to Auth against Elasticsearch
+    password
+        password (required) to Auth against Elasticsearch
+    es_host
+        URL where to Auth against Elasticsearch
+    cloud_id
+        Cloud ID where to Auth against Elasticsearch
+    """
+
     def __init__(self, username, password, es_host=None, cloud_id=None):
         if cloud_id is not None:
             self.client = Elasticsearch(
@@ -23,10 +38,21 @@ class Nemesis:
         self.diffs = []
 
     def get_client_for(self, resource):
+        """
+        For a given resource, return the right python client.
+
+        Parameters
+        ----------
+        resource
+            Nemesis resource :mod:`nemesis.resources`
+        """
         if resource.stack_type == ELASTICSEARCH:
             return self.client
 
     def register(self, resource, force=False, pre_deploy=None, post_deploy=None):
+        """
+        Register a resource with Nemesis to be deployed to Elasticsearch.
+        """
         self.resources.append(
             {
                 "resource": resource,
@@ -40,12 +66,18 @@ class Nemesis:
         )
 
     def preview(self, verbose=False):
+        """
+        Preview a resource vs the existing resource in Elasticsearch.
+        """
         if verbose:
             self._verbose_preview()
         else:
             self._preview()
 
     def _verbose_preview(self):
+        """
+        Verbose preview the remote resource.
+        """
         for item in self.resources:
             resource = item["resource"]
             remote_resource = item["remote_resource"]
@@ -77,6 +109,9 @@ class Nemesis:
             console.print(f"\tUnchanged: {unchanged}")
 
     def _preview(self):
+        """
+        Terse diff the remote resource.
+        """
         table = Table(title="Preview resources to be deployed", show_lines=True)
         table.add_column("Resource", justify="left", no_wrap=True)
         table.add_column("Name", justify="left", no_wrap=True)
@@ -109,6 +144,9 @@ class Nemesis:
             console.print(f"\tUnchanged: {unchanged}")
 
     def _no_change(self, item):
+        """
+        Console print "no change"
+        """
         resource = item["resource"]
         console.print()
         console.rule(f"[resource]{resource}", align="left")
@@ -117,6 +155,7 @@ class Nemesis:
         )
 
     def _pre_deploy(self, resource, function):
+        """Method to call the pre-deploy function registered with a resource."""
         if function is None:
             return
         else:
@@ -132,6 +171,7 @@ class Nemesis:
                 sys.exit()
 
     def _post_deploy(self, resource, function):
+        """Method to call the pos-deploy function registered with a resource."""
         if function is None:
             return
         else:
@@ -147,6 +187,9 @@ class Nemesis:
                 sys.exit()
 
     def _force_deploy(self, item):
+        """
+        Force deploy a resource if specified to force deploy it.
+        """
         resource = item["resource"]
         force = item["force"]
         pre_deploy = item["pre_deploy"]
@@ -161,6 +204,9 @@ class Nemesis:
         self._post_deploy(resource, post_deploy)
 
     def _deploy_update(self, item):
+        """
+        Deploy an update (as opposed to a create of a new resource).
+        """
         resource = item["resource"]
         force = item["force"]
         pre_deploy = item["pre_deploy"]
@@ -173,6 +219,9 @@ class Nemesis:
         self._post_deploy(resource, post_deploy)
 
     def _deploy_create(self, item):
+        """
+        Deploy and create a new object
+        """
         resource = item["resource"]
         force = item["force"]
         pre_deploy = item["pre_deploy"]
@@ -185,6 +234,9 @@ class Nemesis:
         self._post_deploy(resource, post_deploy)
 
     def launch(self, verbose=False):
+        """
+        Method to deploy resources to Elasticsearch.
+        """
         console.print()
         console.rule()
         console.rule(f"Preparing to deploy {len(self.resources)} resources...")

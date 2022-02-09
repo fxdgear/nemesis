@@ -16,12 +16,37 @@ from elasticsearch import RequestError, NotFoundError
 @enforce_types
 @dataclass(frozen=True)
 class IndexSettings(BaseResource):
+    """
+    Manage Elasticsearch `Index Settings <https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#index-modules-settings>`__
+
+    :param index: Index settings
+    :type index: dict, optional
+
+    """
+
     index: Optional[dict] = None
 
 
 @enforce_types
 @dataclass(frozen=True)
 class Index(BaseResource):
+    """
+    Manage an `Elasticsearch Index <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html>`__
+
+    :param name: Name of the index you wish to interact with.
+    :type name: str
+
+    :param aliases: Aliases for the index.
+    :type aliases: Alias, optional
+
+    :param mappings: Mapping for fields in the index.
+    :type mappings: dict, optional
+
+    :param settings: Configuration options for the index
+    :type settings: IndexSettings, optional
+
+    """
+
     name: str
     aliases: Optional[Alias] = None
     mappings: Optional[dict] = None
@@ -32,6 +57,9 @@ class Index(BaseResource):
         return self.name
 
     def asdict(self):
+        """
+        Return Index as a dictionary
+        """
         d = super().asdict()
         d.pop("name")
         return d
@@ -40,6 +68,13 @@ class Index(BaseResource):
     def get(cls, client, name):
         """
         Get an index from Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        :param name: Index name
+        :type name: str
+
         """
         try:
             rt = client.indices.get(index=name)
@@ -48,7 +83,14 @@ class Index(BaseResource):
         ret = cls.fromdict(schemaclass=IndexSchema, body=rt)
         return ret
 
-    def create(self, client, defer_validation=False, *args, **kwargs):
+    def create(self, client, *args, **kwargs):
+        """
+        Create an index in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         try:
             return client.indices.create(
                 index=self.id,
@@ -62,6 +104,13 @@ class Index(BaseResource):
             raise e
 
     def delete(self, client):
+        """
+        Delete an index from Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         try:
             return client.indices.delete(index=self.id)
         except RequestError as e:
