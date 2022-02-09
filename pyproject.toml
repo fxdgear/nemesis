@@ -31,6 +31,9 @@ ipdb = "^0.13.9"
 pytest-coverage = "^0.0"
 mock = "^4.0.3"
 
+[tool.poetry.extras]
+docs = ["sphinx"]
+
 [tool.poetry.scripts]
 nemesis = 'nemesis.scripts.nemesis:cli'
 
