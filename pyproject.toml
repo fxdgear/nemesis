@@ -19,6 +19,7 @@ rich = "^10.14.0"
 requests = "^2.26.0"
 pytz = "^2021.3"
 Sphinx = "^4.4.0"
+sphinx-rtd-theme = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "~21.7b0"
