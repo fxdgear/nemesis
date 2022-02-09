@@ -42,8 +42,6 @@ class Nemesis:
         """
         For a given resource, return the right python client.
 
-        Parameters
-        ----------
         :param resource: Nemesis resource
         :type resource: :mod:`nemesis.resources`
         """
