@@ -15,16 +15,17 @@ class Nemesis:
     """
     Nemesis is our main class for which the whole project revolves around.
 
-    Parameters
-    ----------
-    username
-        username (required) to Auth against Elasticsearch
-    password
-        password (required) to Auth against Elasticsearch
-    es_host
-        URL where to Auth against Elasticsearch
-    cloud_id
-        Cloud ID where to Auth against Elasticsearch
+    :param username: username to Auth against Elasticsearch
+    :type username: str
+
+    :param password: password to Auth against Elasticsearch
+    :type password: str
+
+    :param es_host: URL where to Auth against Elasticsearch
+    :type es_host: str, optional
+
+    :param cloud_id: Cloud ID where to Auth against Elasticsearch
+    :type cloud_id: str, optional
     """
 
     def __init__(self, username, password, es_host=None, cloud_id=None):
@@ -43,8 +44,8 @@ class Nemesis:
 
         Parameters
         ----------
-        resource
-            Nemesis resource :mod:`nemesis.resources`
+        :param resource: Nemesis resource
+        :type resource: :mod:`nemesis.resources`
         """
         if resource.stack_type == ELASTICSEARCH:
             return self.client
