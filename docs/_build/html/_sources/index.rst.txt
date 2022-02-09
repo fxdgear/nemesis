@@ -1,15 +1,27 @@
-.. nemesis documentation master file, created by
-   sphinx-quickstart on Wed Feb  9 08:34:44 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+***********************************
+Welcome to Nemesis's documentation!
+***********************************
 
-Welcome to nemesis's documentation!
-===================================
+.. automodule:: nemesis
+  :members:
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+
+Resources
+=========
+
+Elasticsearch Resources
+-----------------------
+
+.. automodule:: nemesis.resources.elasticsearch.alias
+  :members:
+.. automodule:: nemesis.resources.elasticsearch.index
+  :members:
+.. automodule:: nemesis.resources.elasticsearch.index_template
+  :members:
 
 
 Indices and tables
