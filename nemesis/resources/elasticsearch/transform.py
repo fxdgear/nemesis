@@ -47,7 +47,7 @@ class Latest(BaseResource):
     """
 
     sort: str
-    unique_key: list[str]
+    unique_key: list
 
 
 @enforce_types

@@ -47,6 +47,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-nemesis.resources.elasticsearch.logstash_pipeline">Logstash Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-nemesis.resources.elasticsearch.querydsl">Query DSL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-nemesis.resources.elasticsearch.security">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nemesis.resources.elasticsearch.transform">Transform</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Nemesis Exceptions</a></li>
@@ -658,6 +659,213 @@ But it’s nice to have on the object we are dealing with.</p>
 <dt class="sig sig-object py" id="nemesis.resources.elasticsearch.security.RoleMapping.update">
 <span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.security.RoleMapping.update" title="Permalink to this definition"></a></dt>
 <dd><p>Update a RoleMapping in Elasticsearch</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nemesis.resources.elasticsearch.transform">
+<span id="transform"></span><h2>Transform<a class="headerlink" href="#module-nemesis.resources.elasticsearch.transform" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Dest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.transform.</span></span><span class="sig-name descname"><span class="pre">Dest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pipeline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Dest" title="Permalink to this definition"></a></dt>
+<dd><p>Transform Destination</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Destination index to put transform results in.</p></li>
+<li><p><strong>pipeline</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Optional Pipeline to ingest documents through.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Latest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.transform.</span></span><span class="sig-name descname"><span class="pre">Latest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Latest" title="Permalink to this definition"></a></dt>
+<dd><p>Transform Latest</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+<li><p><strong>unique_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Pivot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.transform.</span></span><span class="sig-name descname"><span class="pre">Pivot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggregations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Pivot" title="Permalink to this definition"></a></dt>
+<dd><p>Transform Pivot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aggregations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Dictionary query of aggregations.</p></li>
+<li><p><strong>group_by</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.RetentionPolicy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.transform.</span></span><span class="sig-name descname"><span class="pre">RetentionPolicy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#nemesis.resources.elasticsearch.transform.RetentionPolicyTime" title="nemesis.resources.elasticsearch.transform.RetentionPolicyTime"><span class="pre">nemesis.resources.elasticsearch.transform.RetentionPolicyTime</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.RetentionPolicy" title="Permalink to this definition"></a></dt>
+<dd><p>Transform RetentionPolicyTime</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.transform.RetentionPolicyTime" title="nemesis.resources.elasticsearch.transform.RetentionPolicyTime"><em>RetentionPolicyTime</em></a>) – <code class="xref py py-mod docutils literal notranslate"><span class="pre">RetentionPolicyTime</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.RetentionPolicyTime">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.transform.</span></span><span class="sig-name descname"><span class="pre">RetentionPolicyTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.RetentionPolicyTime" title="Permalink to this definition"></a></dt>
+<dd><p>Transform RetentionPolicyTime</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Field name</p></li>
+<li><p><strong>max_age</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Settings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.transform.</span></span><span class="sig-name descname"><span class="pre">Settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">docs_per_second</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dates_as_epoch_millis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align_checkpoints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_page_search_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Settings" title="Permalink to this definition"></a></dt>
+<dd><p>Transform Settings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>docs_per_second</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>, </em><em>optional</em>) – Optional docs per second.</p></li>
+<li><p><strong>dates_as_epoch_millis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – use epoch millisecond precision.</p></li>
+<li><p><strong>align_checkpoints</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – Align checkpoints.</p></li>
+<li><p><strong>max_page_search_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Max page search size</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Source">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.transform.</span></span><span class="sig-name descname"><span class="pre">Source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">runtime_mappings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nemesis.resources.elasticsearch.querydsl.QueryDSL" title="nemesis.resources.elasticsearch.querydsl.QueryDSL"><span class="pre">nemesis.resources.elasticsearch.querydsl.QueryDSL</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Source" title="Permalink to this definition"></a></dt>
+<dd><p>Source is a required parameter of <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html#put-transform-request-body">Transform</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – List of inxex names</p></li>
+<li><p><strong>runtime_mappings</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – Optional runtime mappings to use for source.</p></li>
+<li><p><strong>query</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.querydsl.QueryDSL" title="nemesis.resources.elasticsearch.querydsl.QueryDSL"><em>QueryDSL</em></a><em>, </em><em>optional</em>) – Query to use to gather source documents</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Sync">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.transform.</span></span><span class="sig-name descname"><span class="pre">Sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#nemesis.resources.elasticsearch.transform.SyncTime" title="nemesis.resources.elasticsearch.transform.SyncTime"><span class="pre">nemesis.resources.elasticsearch.transform.SyncTime</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Sync" title="Permalink to this definition"></a></dt>
+<dd><p>Transform Sync</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.transform.SyncTime" title="nemesis.resources.elasticsearch.transform.SyncTime"><em>SyncTime</em></a>) – <code class="xref py py-mod docutils literal notranslate"><span class="pre">SyncTime</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.SyncTime">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.transform.</span></span><span class="sig-name descname"><span class="pre">SyncTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'60s'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.SyncTime" title="Permalink to this definition"></a></dt>
+<dd><p>Transform SyncTime</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Field name</p></li>
+<li><p><strong>delay</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Transform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.transform.</span></span><span class="sig-name descname"><span class="pre">Transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Source" title="nemesis.resources.elasticsearch.transform.Source"><span class="pre">nemesis.resources.elasticsearch.transform.Source</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Dest" title="nemesis.resources.elasticsearch.transform.Dest"><span class="pre">nemesis.resources.elasticsearch.transform.Dest</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pivot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Pivot" title="nemesis.resources.elasticsearch.transform.Pivot"><span class="pre">nemesis.resources.elasticsearch.transform.Pivot</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Latest" title="nemesis.resources.elasticsearch.transform.Latest"><span class="pre">nemesis.resources.elasticsearch.transform.Latest</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Sync" title="nemesis.resources.elasticsearch.transform.Sync"><span class="pre">nemesis.resources.elasticsearch.transform.Sync</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retention_policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nemesis.resources.elasticsearch.transform.RetentionPolicy" title="nemesis.resources.elasticsearch.transform.RetentionPolicy"><span class="pre">nemesis.resources.elasticsearch.transform.RetentionPolicy</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Settings" title="nemesis.resources.elasticsearch.transform.Settings"><span class="pre">nemesis.resources.elasticsearch.transform.Settings</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'1m'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Transform" title="Permalink to this definition"></a></dt>
+<dd><p>Manage an Elasticsearch <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html#put-transform-request-body">Transform</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Source" title="nemesis.resources.elasticsearch.transform.Source"><em>Source</em></a>) – Transform Source</p></li>
+<li><p><strong>dest</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Dest" title="nemesis.resources.elasticsearch.transform.Dest"><em>Dest</em></a>) – Destination for transform results</p></li>
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Transform ID</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Transform Description</p></li>
+<li><p><strong>frequency</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Transform frequency</p></li>
+<li><p><strong>pivot</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Pivot" title="nemesis.resources.elasticsearch.transform.Pivot"><em>Pivot</em></a><em>, </em><em>optional</em>) – Transform Pivot</p></li>
+<li><p><strong>latest</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Latest" title="nemesis.resources.elasticsearch.transform.Latest"><em>Latest</em></a><em>, </em><em>optional</em>) – Transform Latest</p></li>
+<li><p><strong>sync</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Sync" title="nemesis.resources.elasticsearch.transform.Sync"><em>Sync</em></a><em>, </em><em>optional</em>) – Transform Sync</p></li>
+<li><p><strong>retention_policy</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.transform.RetentionPolicy" title="nemesis.resources.elasticsearch.transform.RetentionPolicy"><em>RetentionPolicy</em></a><em>, </em><em>optional</em>) – Transform Retention Policy</p></li>
+<li><p><strong>settings</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.transform.Settings" title="nemesis.resources.elasticsearch.transform.Settings"><em>Settings</em></a><em>, </em><em>optional</em>) – Transform settings</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Transform.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defer_validation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Transform.create" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Transform in Elasticsearch</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Transform.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Transform.delete" title="Permalink to this definition"></a></dt>
+<dd><p>Delete a Transform in Elasticsearch</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Transform.get">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Transform.get" title="Permalink to this definition"></a></dt>
+<dd><p>Get a Transform from Elasticsearch</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p></li>
+<li><p><strong>transform_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Transform id</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Transform.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'30s'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Transform.start" title="Permalink to this definition"></a></dt>
+<dd><p>Start a transform</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Transform.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_no_match</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'30s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_for_checkpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_for_completion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Transform.stop" title="Permalink to this definition"></a></dt>
+<dd><p>Stop a Transform</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.transform.Transform.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.transform.Transform.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update a Transform in Elasticsearch</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p>

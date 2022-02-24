@@ -86,9 +86,9 @@ class Role(BaseResource):
     """
 
     name: str
-    applications: list[Application]
+    applications: list
     cluster: list
-    indices: list[Index]
+    indices: list
     metadata: Optional[dict] = None
     run_as: Optional[list] = None
     _global: Optional[dict] = None
