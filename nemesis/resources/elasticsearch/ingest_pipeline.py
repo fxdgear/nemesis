@@ -13,18 +13,18 @@ from nemesis.resources import enforce_types, BaseResource
 @dataclass(repr=False, frozen=True)
 class IngestPipeline(BaseResource):
     """
-    Manage an Ingest Pipeline. https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html
+    Manage an `Ingest Pipeline <https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html>`__
 
     :param id: ID of an ingest pipeline
     :type id: str
 
-    :param processors: List of Processors for an ingest pipeline. https://www.elastic.co/guide/en/elasticsearch/reference/master/processors.html
+    :param processors: List of `Processors <https://www.elastic.co/guide/en/elasticsearch/reference/master/processors.html>`__ for an ingest pipeline.
     :type processors: list
 
     :param description: Description of the Ingest Pipeline.
     :type description: str, optional
 
-    :param on_failure: List of Processors to use in case of a failure.. https://www.elastic.co/guide/en/elasticsearch/reference/master/processors.html
+    :param on_failure: List of `Processors <https://www.elastic.co/guide/en/elasticsearch/reference/master/processors.html>`__ in case of failure.
     :type on_failure: list
 
     :param version: Version number of the ingest pipeline
