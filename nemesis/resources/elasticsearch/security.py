@@ -13,6 +13,19 @@ from nemesis.resources.elasticsearch.querydsl import QueryDSL
 @enforce_types
 @dataclass(frozen=True)
 class Application(BaseResource):
+    """
+    Application for an Elasticsearch Role
+
+    :param application: Application name
+    :type application: str
+
+    :param privileges: Privileges for the application
+    :type privileges: list
+
+    :param resources: Resources the application has access to
+    :type resources: list
+    """
+
     application: str
     privileges: list
     resources: list
@@ -21,6 +34,22 @@ class Application(BaseResource):
 @enforce_types
 @dataclass(frozen=True)
 class Index(BaseResource):
+    """
+    Index for an Elasticsearch Role
+
+    :param name: index name
+    :type name: str
+
+    :param privileges: Privileges for the index
+    :type privileges: list
+
+    :param field_security: Field level security
+    :type field_security: list, optional
+
+    :param allow_restricted_indices: Allow restricted indices
+    :type field_security: bool, optionl
+    """
+
     names: list
     privileges: list
     query: Optional[QueryDSL] = None
@@ -31,11 +60,36 @@ class Index(BaseResource):
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class Role(BaseResource):
+    """
+    Security Role for a Elasticsearch
+
+    :param name: Role name
+    :type name: str
+
+    :param applications: List of :py:mod:`application`
+    :type applications: list
+
+    :param cluster: List of clusters
+    :type cluster: list, optional
+
+    :param indices: List of :py:mod:`Index`
+    :type indices: list
+
+    :param metadata: Optional Role metadata
+    :type metadata: dict, optionl
+
+    :param run_as: Optional list of users to run as for this role.
+    :type run_as: list, optionl
+
+    :param _global: Optional global setting for this role
+    :type _global: bool, optional
+    """
+
     name: str
     applications: list[Application]
     cluster: list
     indices: list[Index]
-    metadata: dict
+    metadata: Optional[dict] = None
     run_as: Optional[list] = None
     _global: Optional[dict] = None
 
@@ -56,6 +110,12 @@ class Role(BaseResource):
     def get(cls, client, name):
         """
         Get a role from Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        :param name: Role name
+        :type name: str
         """
         rt = client.security.get_role(name=name)
         schema = RoleSchema()
@@ -67,6 +127,13 @@ class Role(BaseResource):
         return role
 
     def create(self, client):
+        """
+        Create a Role in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         body = self.asdict()
         try:
             return client.security.put_role(name=self.id, body=body)
@@ -74,9 +141,23 @@ class Role(BaseResource):
             raise e
 
     def update(self, client):
+        """
+        Update a Role in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         return self.create(client)
 
     def delete(self, client):
+        """
+        Delete a Role in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         try:
             return client.security.delete_role(name=self.id)
         except Exception as e:
@@ -86,6 +167,28 @@ class Role(BaseResource):
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class RoleMapping(BaseResource):
+    """
+    Manage a RoleMapping in Elasticsearch
+
+    :param name: Name of the role mapping
+    :type name: str
+
+    :param enabled: Enable or disable the role mapping.
+    :type enabled: bool
+
+    :param rules: Rules for this role mapping
+    :type rules: dict
+
+    :param roles: List of :py:mod:`Role` to associate to this role mapping.
+    :type roles: list, optional
+
+    :param role_templates: List of Role templates.
+    :type role_templates: list, optional
+
+    :param metadata: Optional metadata to associate to this role mapping
+    :type metadata: dict, optional
+    """
+
     name: str
     enabled: bool
     rules: dict
@@ -115,7 +218,13 @@ class RoleMapping(BaseResource):
     @classmethod
     def get(cls, client, name):
         """
-        Get a role from Elasticsearch
+        Get a RoleMapping from Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        :param pipeline_id: Ingest pipeline id
+        :type pipeline_id: str
         """
         rt = client.security.get_role_mapping(name=name)
         schema = RoleMappingSchema()
@@ -127,6 +236,13 @@ class RoleMapping(BaseResource):
         return role
 
     def create(self, client):
+        """
+        Create a RoleMapping in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         body = self.asdict()
         try:
             return client.security.put_role_mapping(name=self.id, body=body)
@@ -134,9 +250,23 @@ class RoleMapping(BaseResource):
             raise e
 
     def update(self, client):
+        """
+        Update a RoleMapping in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         return self.create(client)
 
     def delete(self, client):
+        """
+        Delete a RoleMapping in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         body = self.asdict()
         try:
             return client.security.delete_role_mapping(name=self.id)

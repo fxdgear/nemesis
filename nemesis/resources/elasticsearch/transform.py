@@ -19,6 +19,16 @@ from nemesis.resources.elasticsearch.ingest_pipeline import IngestPipeline
 @enforce_types
 @dataclass(frozen=True)
 class Dest(BaseResource):
+    """
+    Transform Destination
+
+    :param index: Destination index to put transform results in.
+    :type index: str
+
+    :param pipeline: Optional Pipeline to ingest documents through.
+    :type pipeline: str, optional
+    """
+
     index: str
     pipeline: Optional[str] = None
 
@@ -26,6 +36,16 @@ class Dest(BaseResource):
 @enforce_types
 @dataclass(frozen=True)
 class Latest(BaseResource):
+    """
+    Transform Latest
+
+    :param sort:
+    :type sort: str
+
+    :param unique_key:
+    :type unique_key: list, optional
+    """
+
     sort: str
     unique_key: list[str]
 
@@ -33,6 +53,16 @@ class Latest(BaseResource):
 @enforce_types
 @dataclass(frozen=True)
 class Pivot(BaseResource):
+    """
+    Transform Pivot
+
+    :param aggregations: Dictionary query of aggregations.
+    :type aggregations: dict
+
+    :param group_by:
+    :type group_by: dict
+    """
+
     aggregations: dict
     group_by: dict
 
@@ -40,6 +70,16 @@ class Pivot(BaseResource):
 @enforce_types
 @dataclass(frozen=True)
 class RetentionPolicyTime(BaseResource):
+    """
+    Transform RetentionPolicyTime
+
+    :param field: Field name
+    :type field: str
+
+    :param max_age:
+    :type max_age: str
+    """
+
     field: str
     max_age: str
 
@@ -47,12 +87,37 @@ class RetentionPolicyTime(BaseResource):
 @enforce_types
 @dataclass(frozen=True)
 class RetentionPolicy(BaseResource):
+    """
+    Transform RetentionPolicyTime
+
+    :param time: :py:mod:`RetentionPolicyTime`
+    :type time: RetentionPolicyTime
+
+    """
+
     time: RetentionPolicyTime
 
 
 @enforce_types
 @dataclass(frozen=True)
 class Settings(BaseResource):
+    """
+    Transform Settings
+
+    :param docs_per_second: Optional docs per second.
+    :type docs_per_second: float, optional
+
+    :param dates_as_epoch_millis: use epoch millisecond precision.
+    :type dates_as_epoch_millis: bool, optional
+
+    :param align_checkpoints: Align checkpoints.
+    :type align_checkpoints: bool, optional
+
+    :param max_page_search_size: Max page search size
+    :type max_page_search_size: int, optional
+
+    """
+
     docs_per_second: Optional[float]
     dates_as_epoch_millis: Optional[bool]
     align_checkpoints: Optional[bool]
@@ -62,6 +127,16 @@ class Settings(BaseResource):
 @enforce_types
 @dataclass(frozen=True)
 class SyncTime(BaseResource):
+    """
+    Transform SyncTime
+
+    :param field: Field name
+    :type field: str
+
+    :param delay:
+    :type delay: str
+    """
+
     field: str
     delay: str = "60s"
 
@@ -69,6 +144,14 @@ class SyncTime(BaseResource):
 @enforce_types
 @dataclass(frozen=True)
 class Sync(BaseResource):
+    """
+    Transform Sync
+
+    :param time: :py:mod:`SyncTime`
+    :type time: SyncTime
+
+    """
+
     time: SyncTime
 
 
@@ -76,8 +159,17 @@ class Sync(BaseResource):
 @dataclass(frozen=True)
 class Source(BaseResource):
     """
-    Source is a required parameter of Transform
-    https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html#put-transform-request-body
+    Source is a required parameter of `Transform <https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html#put-transform-request-body>`__
+
+    :param index: List of inxex names
+    :type index: list
+
+    :param runtime_mappings: Optional runtime mappings to use for source.
+    :type runtime_mappings: dict, optional
+
+    :param query: Query to use to gather source documents
+    :type query: QueryDSL, optional
+
     """
 
     index: list
@@ -88,7 +180,37 @@ class Source(BaseResource):
 @dataclass(repr=False, frozen=True)
 class Transform(BaseResource):
     """
-    https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html#put-transform-request-body
+    Manage an Elasticsearch `Transform <https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html#put-transform-request-body>`__
+
+    :param source: Transform Source
+    :type source: Source
+
+    :param dest: Destination for transform results
+    :type dest: Dest
+
+    :param id: Transform ID
+    :type id: str, optional
+
+    :param description: Transform Description
+    :type description: str, optional
+
+    :param frequency: Transform frequency
+    :type frequency: str, optional
+
+    :param pivot: Transform Pivot
+    :type pivot: Pivot, optional
+
+    :param latest: Transform Latest
+    :type latest: Latest, optional
+
+    :param sync: Transform Sync
+    :type sync: Sync, optional
+
+    :param retention_policy: Transform Retention Policy
+    :type retention_policy: RetentionPolicy, optional
+
+    :param settings: Transform settings
+    :type settings: Settings, optional
     """
 
     source: Source
@@ -109,7 +231,13 @@ class Transform(BaseResource):
     @classmethod
     def get(cls, client, transform_id):
         """
-        Get a transform from Elasticsearch
+        Get a Transform from Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        :param transform_id: Transform id
+        :type transform_id: str
         """
         try:
             rt = client.transform.get_transform(transform_id=transform_id)
@@ -125,6 +253,13 @@ class Transform(BaseResource):
             return ret[0]
 
     def create(self, client, defer_validation=False, *args, **kwargs):
+        """
+        Create a Transform in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         try:
             ret = client.transform.put_transform(
                 transform_id=self.id,
@@ -138,7 +273,24 @@ class Transform(BaseResource):
             raise e
         return ret
 
+    def update(self, client, *args, **kwargs):
+        """
+        Update a Transform in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
+        return self.create(client)
+
     def delete(self, client, force=False, *args, **kwargs):
+        """
+        Delete a Transform in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         try:
             return client.transform.delete_transform(
                 transform_id=self.id, force=force, *args, **kwargs
@@ -157,6 +309,9 @@ class Transform(BaseResource):
         *args,
         **kwargs,
     ):
+        """
+        Stop a Transform
+        """
         try:
             return client.transform.stop_transform(
                 transform_id=self.id,
@@ -172,12 +327,12 @@ class Transform(BaseResource):
             raise e
 
     def start(self, client, timeout="30s", *args, **kwargs):
+        """
+        Start a transform
+        """
         try:
             return client.transform.start_transform(
                 transform_id=self.id, timeout=timeout, *args, **kwargs
             )
         except Exception as e:
             raise e
-
-    def update(self, client, *args, **kwargs):
-        return self.create(client)

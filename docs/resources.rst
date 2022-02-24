@@ -46,3 +46,9 @@ Security
 
 .. automodule:: nemesis.resources.elasticsearch.security
   :members:
+
+Transform
+---------
+
+.. automodule:: nemesis.resources.elasticsearch.transform
+  :members:
