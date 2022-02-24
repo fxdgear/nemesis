@@ -140,7 +140,6 @@ nemesis in your own python projects as a library.</p>
 <p>Nemesis supports deep diffing of resources with a succinct mode and verbose mode.</p>
 <p>Example of succinct diff.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; nemesis preview</span>
-<span class="go">Hello Nemesis!</span>
 <span class="go">                             Preview resources to be deployed</span>
 <span class="go">┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓</span>
 <span class="go">┃ Resource         ┃ Name                             ┃  Action   ┃                 Diff ┃</span>
@@ -177,8 +176,7 @@ nemesis in your own python projects as a library.</p>
 </pre></div>
 </div>
 <p>Example of a verbose diff.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; nemesis launch -v</span>
-<span class="go">Hello Nemesis!</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; nemesis preview -v</span>
 <span class="go">────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="go"> Preview IndexTemplate(index_template_billing_aggregate)</span>
 <span class="go">┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓</span>
@@ -256,6 +254,7 @@ There’s no automated way to do this. But would be nice to create a code genera
 <li class="toctree-l2"><a class="reference internal" href="resources.html#module-nemesis.resources.elasticsearch.ingest_pipeline">Ingest Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="resources.html#module-nemesis.resources.elasticsearch.logstash_pipeline">Logstash Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="resources.html#module-nemesis.resources.elasticsearch.querydsl">Query DSL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#module-nemesis.resources.elasticsearch.security">Security</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Nemesis Exceptions</a></li>

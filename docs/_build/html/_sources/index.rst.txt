@@ -97,7 +97,6 @@ Example of succinct diff.
 .. code-block:: console
 
     > nemesis preview
-    Hello Nemesis!
                                  Preview resources to be deployed
     ┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
     ┃ Resource         ┃ Name                             ┃  Action   ┃                 Diff ┃
@@ -136,8 +135,7 @@ Example of a verbose diff.
 
 .. code-block:: console
 
-    > nemesis launch -v
-    Hello Nemesis!
+    > nemesis preview -v
     ────────────────────────────────────────────────────────────────────────────────────────────────────────
      Preview IndexTemplate(index_template_billing_aggregate)
     ┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

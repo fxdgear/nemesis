@@ -40,3 +40,9 @@ Query DSL
 
 .. automodule:: nemesis.resources.elasticsearch.querydsl
   :members:
+
+Security
+---------
+
+.. automodule:: nemesis.resources.elasticsearch.security
+  :members:
