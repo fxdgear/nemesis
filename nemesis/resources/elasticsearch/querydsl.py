@@ -11,6 +11,131 @@ from nemesis.resources import enforce_types, BaseResource
 @enforce_types
 @dataclass(frozen=True)
 class QueryDSL(BaseResource):
+    """
+    Manage a query for Elasticsearch
+
+    :param id: Unique ID for a query.
+    :type id: str, optional
+
+    :param bool: Bool query
+    :type bool: dict, optional
+
+    :param boolstring: boolstring query
+    :type boolstring: dict, optional
+
+    :param common: Common query
+    :type common: dict, optional
+
+    :param constant_score: Constant score query
+    :type constant_score: dict, optional
+
+    :param custom_filters_score: custom filters score query
+    :type custom_filters_score: dict, optional
+
+    :param dis_max: dis_max query
+    :type dis_max: dict, optional
+
+    :param distance_feature: distance feature query
+    :type distance_feature: dict, optional
+
+    :param exists: exists query
+    :type exists: dict, optional
+
+    :param field: Field query
+    :type field: dict, optional
+
+    :param function_score: function score query
+    :type function_score: dict, optional
+
+    :param fuzzy: fuzzy query
+    :type fuzzy: dict, optional
+
+    :param geo_shape: geo_shape query
+    :type geo_shape: dict, optional
+
+    :param has_child: has child query
+    :type has_child: dict, optional
+
+    :param has_parent: has_parent query
+    :type has_parent: dict, optional
+
+    :param ids: IDs query
+    :type ids: dict, optional
+
+    :param indices: indices query
+    :type indices: dict, optional
+
+    :param match: Match query
+    :type match: dict, optional
+
+    :param match_all: Match all query
+    :type match_all: dict, optional
+
+    :param match_phrase: match_phrase query
+    :type match_phrase: dict, optional
+
+    :param match_phrase_prefix: Match phrase prefix query
+    :type match_phrase_prefix: dict, optional
+
+    :param nested: Nested query
+    :type nested: dict, optional
+
+    :param percolate: percolate query
+    :type percolate: dict, optional
+
+    :param prefix: Prefix query
+    :type prefix: dict, optional
+
+    :param query_string: query string query
+    :type query_string: dict, optional
+
+    :param range: range query
+    :type range: dict, optional
+
+    :param regexp: Regex query
+    :type regexp: dict, optional
+
+    :param script: script
+    :type script: dict, optional
+
+    :param simple_query_string: simple_query_string query
+    :type simple_query_string: dict, optional
+
+    :param span_containing: span containing query
+    :type span_containing: dict, optional
+
+    :param span_first: span first query
+    :type span_first: dict, optional
+
+    :param span_multi: span multi query
+    :type span_multi: dict, optional
+
+    :param span_near: span near query
+    :type span_near: dict, optional
+
+    :param span_not: span not query
+    :type span_not: dict, optional
+
+    :param span_or: span or query
+    :type span_or: dict, optional
+
+    :param span_term: Span term query
+    :type span_term: dict, optional
+
+    :param span_within: Span within query
+    :type span_within: dict, optional
+
+    :param term: Term query
+    :type term: dict, optional
+
+    :param wildcard: Wildcard Query
+    :type wildcard: dict, optional
+
+    :param wrapper: Wrapper query
+    :type wrapper: dict, optional
+
+    """
+
     id: Optional[str] = None
     bool: Optional[dict] = None
     boolstring: Optional[dict] = None
