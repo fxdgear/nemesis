@@ -18,7 +18,7 @@ class Trigger(BaseResource):
     Watch Trigger
 
     :param schedule: Schedule to trigger a watch.
-    :format schedule: dict
+    :type schedule: dict
     """
 
     schedule: dict
@@ -31,13 +31,13 @@ class Body(BaseResource):
     Watch Body
 
     :param query: Schedule to trigger a watch.
-    :format query: QueryDSL
+    :type query: QueryDSL
 
     :param size: Optional size parameter.
-    :format size: int, optional
+    :type size: int, optional
 
     :param sort: Sort Dictionary
-    :format sort: dict, optional
+    :type sort: dict, optional
     """
 
     query: QueryDSL
@@ -52,10 +52,10 @@ class SearchTemplate(BaseResource):
     Watch Search Template
 
     :param id: Search template id
-    :format id: str
+    :type id: str
 
     :param params: Search template parameters
-    :format params: dict
+    :type params: dict
     """
 
     id: str
@@ -69,13 +69,13 @@ class SearchRequest(BaseResource):
     Watch Search Request
 
     :param indices: List of indices to search.
-    :format indices: list
+    :type indices: list
 
     :param body: Watch Body
-    :format body: Body
+    :type body: Body
 
     :param template: SearchTemplate
-    :format template: SearchTemplate, optional
+    :type template: SearchTemplate, optional
     """
 
     indices: list
@@ -90,10 +90,10 @@ class Search(BaseResource):
     Watch Search
 
     :param request: Watch Search Request.
-    :format indices: SearchRequest
+    :type indices: SearchRequest
 
     :param extract: Optional list to extract
-    :format extract: list, optional
+    :type extract: list, optional
     """
 
     request: SearchRequest
@@ -107,46 +107,46 @@ class HttpRequest(BaseResource):
     http request object
 
     :param scheme: http url scheme.
-    :format scheme: str, optional
+    :type scheme: str, optional
 
     :param host: Url host
-    :format host: str, optional
+    :type host: str, optional
 
     :param port: url port.
-    :format port: str, optional
+    :type port: str, optional
 
     :param url: Request URL.
-    :format url: str, optional
+    :type url: str, optional
 
     :param method: Request method.
-    :format method: str, optional
+    :type method: str, optional
 
     :param body: Request body.
-    :format body: str, optional
+    :type body: str, optional
 
     :param params: Request params.
-    :format params: str, optional
+    :type params: str, optional
 
     :param headers: Request headers.
-    :format headers: str, optional
+    :type headers: str, optional
 
     :param auth: Request auth.
-    :format auth: str, optional
+    :type auth: str, optional
 
     :param proxy: Request proxy.
-    :format proxy: str, optional
+    :type proxy: str, optional
 
     :param connection_timeout: Request connection timeout.
-    :format connection_timeout: str, optional
+    :type connection_timeout: str, optional
 
     :param read_timeout: Request read timeout.
-    :format read_timeout: str, optional
+    :type read_timeout: str, optional
 
     :param extract: Request extract.
-    :format extract: str, optional
+    :type extract: str, optional
 
     :param response_content_type: Request response content type.
-    :format response_content_type: str, optional
+    :type response_content_type: str, optional
 
     """
 
