@@ -17,7 +17,8 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Nemesis Client" href="nemesis.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -35,18 +36,12 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to Nemesis’s documentation!</a><ul>
-<li><a class="reference internal" href="#resources">Resources</a><ul>
-<li><a class="reference internal" href="#module-nemesis.resources.elasticsearch.alias">Elasticsearch Resources</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="nemesis.html">Nemesis Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Nemesis Elasticsearch Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Nemesis Exceptions</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
-</li>
-</ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -71,234 +66,205 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-nemesis">
-<span id="welcome-to-nemesis-s-documentation"></span><h1>Welcome to Nemesis’s documentation!<a class="headerlink" href="#module-nemesis" title="Permalink to this headline"></a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="nemesis.Nemesis">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.</span></span><span class="sig-name descname"><span class="pre">Nemesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">es_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloud_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.Nemesis" title="Permalink to this definition"></a></dt>
-<dd><p>Nemesis is our main class for which the whole project revolves around.</p>
-<dl class="simple">
-<dt>username</dt><dd><p>username (required) to Auth against Elasticsearch</p>
-</dd>
-<dt>password</dt><dd><p>password (required) to Auth against Elasticsearch</p>
-</dd>
-<dt>es_host</dt><dd><p>URL where to Auth against Elasticsearch</p>
-</dd>
-<dt>cloud_id</dt><dd><p>Cloud ID where to Auth against Elasticsearch</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.Nemesis.get_client_for">
-<span class="sig-name descname"><span class="pre">get_client_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.Nemesis.get_client_for" title="Permalink to this definition"></a></dt>
-<dd><p>For a given resource, return the right python client.</p>
-<dl class="simple">
-<dt>resource</dt><dd><p>Nemesis resource <code class="xref py py-mod docutils literal notranslate"><span class="pre">nemesis.resources</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.Nemesis.launch">
-<span class="sig-name descname"><span class="pre">launch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.Nemesis.launch" title="Permalink to this definition"></a></dt>
-<dd><p>Method to deploy resources to Elasticsearch.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.Nemesis.preview">
-<span class="sig-name descname"><span class="pre">preview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.Nemesis.preview" title="Permalink to this definition"></a></dt>
-<dd><p>Preview a resource vs the existing resource in Elasticsearch.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.Nemesis.register">
-<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_deploy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_deploy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.Nemesis.register" title="Permalink to this definition"></a></dt>
-<dd><p>Register a resource with Nemesis to be deployed to Elasticsearch.</p>
-</dd></dl>
-
-</dd></dl>
-
-<div class="toctree-wrapper compound">
+  <section id="welcome-to-nemesis-s-documentation">
+<h1>Welcome to Nemesis’s documentation!<a class="headerlink" href="#welcome-to-nemesis-s-documentation" title="Permalink to this headline"></a></h1>
+<p>Nemesis is a python library to manage Elasticsearch resources as code. Nemesis operates
+a lot more like Pulumi than terraform. Each resource that nemesis supports is an actual
+python object which can be used like any other python object.</p>
+<p>Elasticsearch resources can be crafted as Python objects.
+Elasticsearch resources can be fetched from the Elasticsearch cluster and diffed against local versions.
+Deployments can happen if a remote resource doesn’t exist.
+Deployments can happen if a local_resource is registered with force=True, to force updating of the
+resource even if it hasn’t changed.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
+<p>Install <code class="docutils literal notranslate"><span class="pre">nemesis</span></code> package with <a class="reference external" href="https://pypi.org/project/nemesis">pip</a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m pip install nemesis
+</pre></div>
 </div>
-<section id="resources">
-<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline"></a></h2>
-<section id="module-nemesis.resources.elasticsearch.alias">
-<span id="elasticsearch-resources"></span><h3>Elasticsearch Resources<a class="headerlink" href="#module-nemesis.resources.elasticsearch.alias" title="Permalink to this headline"></a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.alias.Alias">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.alias.</span></span><span class="sig-name descname"><span class="pre">Alias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><span class="pre">nemesis.resources.elasticsearch.querydsl.QueryDSL</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_routing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_hidden</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_write_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">routing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_routing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.alias.Alias" title="Permalink to this definition"></a></dt>
-<dd><p>Manage an <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html">Elasticsearch Index</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filter</strong> (<em>QueryDSL</em><em>, </em><em>optional</em>) – Query used to limit documents the alias can access.</p></li>
-<li><p><strong>index_routing</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Value used to route indexing operations to a specific shard. If specified, this overwrites the routing value for indexing operations. Data stream aliases don’t support this parameter.</p></li>
-<li><p><strong>is_hidden</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If true, the alias is hidden. Defaults to false. All data streams or indices for the alias must have the same is_hidden value.</p></li>
-<li><p><strong>is_write_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If true, sets the write index or data stream for the alias.</p></li>
-<li><p><strong>routing</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Value used to route indexing and search operations to a specific shard. Data stream aliases don’t support this parameter.</p></li>
-<li><p><strong>search_routing</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Value used to route search operations to a specific shard. If specified, this overwrites the routing value for search operations. Data stream aliases don’t support this parameter.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<span class="target" id="module-nemesis.resources.elasticsearch.index"></span><dl class="py class">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index.Index">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.index.</span></span><span class="sig-name descname"><span class="pre">Index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nemesis.resources.elasticsearch.alias.Alias" title="nemesis.resources.elasticsearch.alias.Alias"><span class="pre">nemesis.resources.elasticsearch.alias.Alias</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mappings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nemesis.resources.elasticsearch.index.IndexSettings" title="nemesis.resources.elasticsearch.index.IndexSettings"><span class="pre">nemesis.resources.elasticsearch.index.IndexSettings</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index.Index" title="Permalink to this definition"></a></dt>
-<dd><p>Manage an <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html">Elasticsearch Index</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Name of the index you wish to interact with.</p></li>
-<li><p><strong>aliases</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.alias.Alias" title="nemesis.resources.elasticsearch.alias.Alias"><em>Alias</em></a><em>, </em><em>optional</em>) – Aliases for the index.</p></li>
-<li><p><strong>mappings</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – Mapping for fields in the index.</p></li>
-<li><p><strong>settings</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.index.IndexSettings" title="nemesis.resources.elasticsearch.index.IndexSettings"><em>IndexSettings</em></a><em>, </em><em>optional</em>) – Configuration options for the index</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index.Index.asdict">
-<span class="sig-name descname"><span class="pre">asdict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index.Index.asdict" title="Permalink to this definition"></a></dt>
-<dd><p>Return Index as a dictionary</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index.Index.create">
-<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index.Index.create" title="Permalink to this definition"></a></dt>
-<dd><p>Create an index in Elasticsearch</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index.Index.delete">
-<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index.Index.delete" title="Permalink to this definition"></a></dt>
-<dd><p>Delete an index from Elasticsearch</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index.Index.get">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index.Index.get" title="Permalink to this definition"></a></dt>
-<dd><p>Get an index from Elasticsearch</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Index name</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index.IndexSettings">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.index.</span></span><span class="sig-name descname"><span class="pre">IndexSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index.IndexSettings" title="Permalink to this definition"></a></dt>
-<dd><p>Manage Elasticsearch <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#index-modules-settings">Index Settings</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – Index settings</p>
-</dd>
-</dl>
-</dd></dl>
-
-<span class="target" id="module-nemesis.resources.elasticsearch.index_template"></span><dl class="py class">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index_template.IndexTemplate">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.index_template.</span></span><span class="sig-name descname"><span class="pre">IndexTemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_patterns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#nemesis.resources.elasticsearch.index_template.Template" title="nemesis.resources.elasticsearch.index_template.Template"><span class="pre">nemesis.resources.elasticsearch.index_template.Template</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">composed_of</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index_template.IndexTemplate" title="Permalink to this definition"></a></dt>
-<dd><p>Manage <a class="reference external" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-put-template.html">Index Template</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Name of the index you wish to interact with.</p></li>
-<li><p><strong>index_patterns</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – Array of wildcard (*) expressions used to match the names of data streams and indices during creation.</p></li>
-<li><p><strong>template</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.index_template.Template" title="nemesis.resources.elasticsearch.index_template.Template"><em>Template</em></a>) – Template to be applied. It may optionally include an aliases, mappings, or settings configuration.</p></li>
-<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Version number used to manage index templates externally. This number is not automatically generated by Elasticsearch</p></li>
-<li><p><strong>priority</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Priority to determine index template precedence when a new data stream or index is created. The index template with the highest priority is chosen. If no priority is specified the template is treated as though it is of priority 0 (lowest priority). This number is not automatically generated by Elasticsearch.</p></li>
-<li><p><strong>meta</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – Optional user metadata about the index template. May have any contents. This map is not automatically generated by Elasticsearch.</p></li>
-<li><p><strong>composed_of</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – An ordered list of component template names. Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence. See Composing multiple component templates for an example.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index_template.IndexTemplate.asdict">
-<span class="sig-name descname"><span class="pre">asdict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index_template.IndexTemplate.asdict" title="Permalink to this definition"></a></dt>
-<dd><p>The “name” field isn’t part of the actual body sent to Elasticsearch.
-But it’s nice to have on the object we are dealing with.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index_template.IndexTemplate.create">
-<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index_template.IndexTemplate.create" title="Permalink to this definition"></a></dt>
-<dd><p>Create an index template in Elasticsearch</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index_template.IndexTemplate.delete">
-<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index_template.IndexTemplate.delete" title="Permalink to this definition"></a></dt>
-<dd><p>Delete an index template in Elasticsearch</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index_template.IndexTemplate.get">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index_template.IndexTemplate.get" title="Permalink to this definition"></a></dt>
-<dd><p>Get an index template from Elasticsearch</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Index template name</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index_template.IndexTemplate.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index_template.IndexTemplate.update" title="Permalink to this definition"></a></dt>
-<dd><p>Update an index template in Elasticsearch</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>client</strong> (<code class="xref py py-mod docutils literal notranslate"><span class="pre">Elasticsearch</span></code>) – Elasticsearch Client</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="nemesis.resources.elasticsearch.index_template.Template">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nemesis.resources.elasticsearch.index_template.</span></span><span class="sig-name descname"><span class="pre">Template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nemesis.resources.elasticsearch.index.IndexSettings" title="nemesis.resources.elasticsearch.index.IndexSettings"><span class="pre">nemesis.resources.elasticsearch.index.IndexSettings</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mappings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#nemesis.resources.elasticsearch.alias.Alias" title="nemesis.resources.elasticsearch.alias.Alias"><span class="pre">nemesis.resources.elasticsearch.alias.Alias</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nemesis.resources.elasticsearch.index_template.Template" title="Permalink to this definition"></a></dt>
-<dd><p>Template object for IndexTemplate</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>aliases</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.alias.Alias" title="nemesis.resources.elasticsearch.alias.Alias"><em>Alias</em></a><em>, </em><em>optional</em>) – Aliases for the index.</p></li>
-<li><p><strong>mappings</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – Mapping for fields in the index.</p></li>
-<li><p><strong>settings</strong> (<a class="reference internal" href="#nemesis.resources.elasticsearch.index.IndexSettings" title="nemesis.resources.elasticsearch.index.IndexSettings"><em>IndexSettings</em></a><em>, </em><em>optional</em>) – Configuration options for the index</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
+<section id="create-your-first-nemesis-project">
+<h2>Create your first nemesis project<a class="headerlink" href="#create-your-first-nemesis-project" title="Permalink to this headline"></a></h2>
+<p>First create the directory you want to put your nemesis project into:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir my_first_project
+<span class="gp">$ </span><span class="nb">cd</span> my_first_project
+<span class="gp">$ </span>nemesis new
+</pre></div>
+</div>
+</section>
+<section id="the-nemesis-py-file">
+<h2>The __nemesis__.py file<a class="headerlink" href="#the-nemesis-py-file" title="Permalink to this headline"></a></h2>
+<p>After you run the <cite>nemesis new</cite> command a newly created __nemesis__.py file will exist. This file has some example code in it to help you get started.</p>
+<ol class="arabic simple">
+<li><p>Instantiate the <cite>Nemesis</cite> object as the variable <cite>n</cite>.</p></li>
+<li><p>Using the <cite>nemesis.resources.elasticsearch.*</cite> modules create your ES resources</p></li>
+<li><p><cite>register</cite> those resources with the <cite>Nemesis</cite> client. <cite>n.register(my_resource_name)</cite></p></li>
+</ol>
+<section id="pre-post-deploy-hooks">
+<h3>Pre/Post deploy hooks<a class="headerlink" href="#pre-post-deploy-hooks" title="Permalink to this headline"></a></h3>
+<p>nemesis supports pre and post deploy hooks. This is useful in various situations</p>
+<ol class="arabic simple">
+<li><p>You are creating an ingest pipeline and you want to run some tests to ensure your pipeline works before the pipeline is deployed. You can write a function to call <cite>resource.simulate</cite> on  your pipeline resource.</p></li>
+<li><p>You have a transform you want to “reset”. You can define a “predeploy” function to “stop” the current transform, delete the current dest index, and then recreate the dest index. then define a “postdeploy” function which will start the transform</p></li>
+<li><p>Watchers can be “simulated” using the “execute” api. This unfortunatly only works on watchers that exist already, but you can deploy the watcher and then write a post-deploy test that will ensure your watcher works as expected.</p></li>
+<li><p>Your imagination is the limit on things you might want to do before and/or after something has been deployed</p></li>
+</ol>
+</section>
+</section>
+<section id="cli">
+<h2>CLI<a class="headerlink" href="#cli" title="Permalink to this headline"></a></h2>
+<p>While nemesis was initially designed to be a CLI tool, that does not mean you can’t include
+nemesis in your own python projects as a library.</p>
+<section id="help">
+<h3>Help<a class="headerlink" href="#help" title="Permalink to this headline"></a></h3>
+<p>Running the <cite>–help</cite> flag will give you help on any command or subcommand.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; nemesis --help</span>
+<span class="go">Usage: nemesis [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...</span>
+
+<span class="go">  Nemesis CLI</span>
+
+<span class="go">Options:</span>
+<span class="go">  --help  Show this message and exit.</span>
+
+<span class="go">Commands:</span>
+<span class="go">  launch   Deploy resources to Elasticsearch</span>
+<span class="go">  new      Create a new nemesis deployment</span>
+<span class="go">  preview  Preview the resources to deployed</span>
+</pre></div>
+</div>
+</section>
+<section id="preview">
+<h3>Preview<a class="headerlink" href="#preview" title="Permalink to this headline"></a></h3>
+<p>Run <cite>nemesis preview</cite> to see what will be deployed to Elasticsearch.</p>
+<p>This will render a diff to tell you what’s going to be created or changed.</p>
+<p>Nemesis supports deep diffing of resources with a succinct mode and verbose mode.</p>
+<p>Example of succinct diff.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; nemesis preview</span>
+<span class="go">Hello Nemesis!</span>
+<span class="go">                             Preview resources to be deployed</span>
+<span class="go">┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓</span>
+<span class="go">┃ Resource         ┃ Name                             ┃  Action   ┃                 Diff ┃</span>
+<span class="go">┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩</span>
+<span class="go">│ IndexTemplate    │ index_template_billing_aggregate │  create   │ + [&#39;index_patterns&#39;] │</span>
+<span class="go">│                  │                                  │           │       + [&#39;template&#39;] │</span>
+<span class="go">│                  │                                  │           │        + [&#39;version&#39;] │</span>
+<span class="go">├──────────────────┼──────────────────────────────────┼───────────┼──────────────────────┤</span>
+<span class="go">│ IngestPipeline   │ total_cost                       │  create   │             + [&#39;id&#39;] │</span>
+<span class="go">│                  │                                  │           │     + [&#39;processors&#39;] │</span>
+<span class="go">│                  │                                  │           │    + [&#39;description&#39;] │</span>
+<span class="go">│                  │                                  │           │        + [&#39;version&#39;] │</span>
+<span class="go">├──────────────────┼──────────────────────────────────┼───────────┼──────────────────────┤</span>
+<span class="go">│ Transform        │ total_cost_2021_12               │  create   │         + [&#39;source&#39;] │</span>
+<span class="go">│                  │                                  │           │           + [&#39;dest&#39;] │</span>
+<span class="go">│                  │                                  │           │             + [&#39;id&#39;] │</span>
+<span class="go">│                  │                                  │           │          + [&#39;pivot&#39;] │</span>
+<span class="go">│                  │                                  │           │    + [&#39;description&#39;] │</span>
+<span class="go">│                  │                                  │           │      + &#39;frequency&#39;]  │</span>
+<span class="go">├──────────────────┼──────────────────────────────────┼───────────┼──────────────────────┤</span>
+<span class="go">│ LogstashPipeline │ test_logstash_pipeline           │  update   │  ~ [&#39;last_modified&#39;] │</span>
+<span class="go">├──────────────────┼──────────────────────────────────┼───────────┼──────────────────────┤</span>
+<span class="go">│ Role             │ test-role                        │ unchanged │                      │</span>
+<span class="go">├──────────────────┼──────────────────────────────────┼───────────┼──────────────────────┤</span>
+<span class="go">│ RoleMapping      │ test_role_mapping                │ unchanged │                      │</span>
+<span class="go">├──────────────────┼──────────────────────────────────┼───────────┼──────────────────────┤</span>
+<span class="go">│ Watch            │ test-watch                       │ unchanged │                      │</span>
+<span class="go">└──────────────────┴──────────────────────────────────┴───────────┴──────────────────────┘</span>
+
+<span class="go">Resources:</span>
+<span class="go">        Creating: 3</span>
+<span class="go">        Updating: 1</span>
+<span class="go">        Unchanged: 3</span>
+</pre></div>
+</div>
+<p>Example of a verbose diff.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; nemesis launch -v</span>
+<span class="go">Hello Nemesis!</span>
+<span class="go">────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span class="go"> Preview IndexTemplate(index_template_billing_aggregate)</span>
+<span class="go">┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓</span>
+<span class="go">┃ Field               ┃ Value                           ┃</span>
+<span class="go">┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩</span>
+<span class="go">│ [&#39;index_patterns&#39;]  │ + [                             │</span>
+<span class="go">│                     │   &quot;billing_aggregate_*&quot;         │</span>
+<span class="go">│                     │ ]                               │</span>
+<span class="go">│ [&#39;template&#39;]        │ + {                             │</span>
+<span class="go">│                     │   &quot;settings&quot;: {                 │</span>
+<span class="go">│                     │     &quot;index&quot;: {                  │</span>
+<span class="go">│                     │       &quot;number_of_shards&quot;: &quot;1&quot;,  │</span>
+<span class="go">│                     │       &quot;number_of_replicas&quot;: &quot;1&quot; │</span>
+<span class="go">│                     │     }                           │</span>
+<span class="go">│                     │   },                            │</span>
+<span class="go">│                     │   &quot;mappings&quot;: {                 │</span>
+<span class="go">│                     │     &quot;_source&quot;: {                │</span>
+<span class="go">│                     │       &quot;enabled&quot;: true           │</span>
+<span class="go">│                     │     },                          │</span>
+<span class="go">│                     │     &quot;properties&quot;: {             │</span>
+<span class="go">│                     │       &quot;@timestamp&quot;: {           │</span>
+<span class="go">│                     │         &quot;type&quot;: &quot;date&quot;          │</span>
+<span class="go">│                     │       },                        │</span>
+<span class="go">│                     │       &quot;@version&quot;: {             │</span>
+<span class="go">│                     │         &quot;type&quot;: &quot;text&quot;          │</span>
+<span class="go">│                     │       },                        │</span>
+<span class="go">│                     │       &quot;cloud_provider&quot;: {       │</span>
+<span class="go">│                     │         &quot;type&quot;: &quot;keyword&quot;       │</span>
+<span class="go">│                     │       },                        │</span>
+<span class="go">│                     │       &quot;sum_total&quot;: {            │</span>
+<span class="go">│                     │         &quot;type&quot;: &quot;float&quot;         │</span>
+<span class="go">│                     │       },                        │</span>
+<span class="go">│                     │       &quot;team_name&quot;: {            │</span>
+<span class="go">│                     │         &quot;type&quot;: &quot;keyword&quot;       │</span>
+<span class="go">│                     │       }                         │</span>
+<span class="go">│                     │     }                           │</span>
+<span class="go">│                     │   }                             │</span>
+<span class="go">│                     │ }                               │</span>
+<span class="go">│ [&#39;version&#39;]         │ + 3                             │</span>
+<span class="go">└─────────────────────┴─────────────────────────────────┘</span>
+</pre></div>
+</div>
+</section>
+<section id="launch">
+<h3>Launch<a class="headerlink" href="#launch" title="Permalink to this headline"></a></h3>
+<p>Run <cite>nemesis launch</cite> to deploy your changes.</p>
+<p>This will actually ship your resources to Elasticsearch</p>
+</section>
+</section>
+<section id="compatibility">
+<h2>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline"></a></h2>
+<p>Compatibility is not currently guareneed. But work will be done to tie versions of nemesis with
+the release cycle of Elasticsearch.</p>
+</section>
+<section id="adding-new-resources">
+<h2>Adding new resources<a class="headerlink" href="#adding-new-resources" title="Permalink to this headline"></a></h2>
+<p>Creating new resources is not trivial at this point in time.
+It’s difficult because, to create the resource you first need to define the dataclass and all the attributes on that class.
+Next you would need to define the Schema for that resource, then you would need to define all the CRUD method for that resource.
+There’s no automated way to do this. But would be nice to create a code generator to scan the Elasticsearch repo and pull out the various resources and their types so they can be created in Nemesis.</p>
+<p>Pull requests for new resources added to nemesis would be greatly appriciated!</p>
+</section>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="nemesis.html">Nemesis Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nemesis.html#module-nemesis">Nemesis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Nemesis Elasticsearch Resources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#module-nemesis.resources.elasticsearch.alias">Alias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#module-nemesis.resources.elasticsearch.index">Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#module-nemesis.resources.elasticsearch.index_template">Index Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#module-nemesis.resources.elasticsearch.ingest_pipeline">Ingest Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#module-nemesis.resources.elasticsearch.logstash_pipeline">Logstash Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#module-nemesis.resources.elasticsearch.querydsl">Query DSL</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Nemesis Exceptions</a></li>
+</ul>
+</div>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline"></a></h2>
+<p>Copyright 2022, Licensed under the Apache License, Version 2.0.</p>
 </section>
 <section id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h2>
@@ -313,7 +279,9 @@ But it’s nice to have on the object we are dealing with.</p>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nemesis.html" class="btn btn-neutral float-right" title="Nemesis Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
