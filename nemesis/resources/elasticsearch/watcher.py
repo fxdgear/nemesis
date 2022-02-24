@@ -14,12 +14,32 @@ from elasticsearch import NotFoundError
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class Trigger(BaseResource):
+    """
+    Watch Trigger
+
+    :param schedule: Schedule to trigger a watch.
+    :format schedule: dict
+    """
+
     schedule: dict
 
 
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class Body(BaseResource):
+    """
+    Watch Body
+
+    :param query: Schedule to trigger a watch.
+    :format query: QueryDSL
+
+    :param size: Optional size parameter.
+    :format size: int, optional
+
+    :param sort: Sort Dictionary
+    :format sort: dict, optional
+    """
+
     query: QueryDSL
     size: Optional[int] = None
     sort: Optional[dict] = None
@@ -28,6 +48,16 @@ class Body(BaseResource):
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class SearchTemplate(BaseResource):
+    """
+    Watch Search Template
+
+    :param id: Search template id
+    :format id: str
+
+    :param params: Search template parameters
+    :format params: dict
+    """
+
     id: str
     params: dict
 
@@ -35,6 +65,19 @@ class SearchTemplate(BaseResource):
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class SearchRequest(BaseResource):
+    """
+    Watch Search Request
+
+    :param indices: List of indices to search.
+    :format indices: list
+
+    :param body: Watch Body
+    :format body: Body
+
+    :param template: SearchTemplate
+    :format template: SearchTemplate, optional
+    """
+
     indices: list
     body: Body
     template: Optional[SearchTemplate] = None
@@ -43,6 +86,16 @@ class SearchRequest(BaseResource):
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class Search(BaseResource):
+    """
+    Watch Search
+
+    :param request: Watch Search Request.
+    :format indices: SearchRequest
+
+    :param extract: Optional list to extract
+    :format extract: list, optional
+    """
+
     request: SearchRequest
     extract: Optional[list] = None
 
@@ -50,6 +103,53 @@ class Search(BaseResource):
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class HttpRequest(BaseResource):
+    """
+    http request object
+
+    :param scheme: http url scheme.
+    :format scheme: str, optional
+
+    :param host: Url host
+    :format host: str, optional
+
+    :param port: url port.
+    :format port: str, optional
+
+    :param url: Request URL.
+    :format url: str, optional
+
+    :param method: Request method.
+    :format method: str, optional
+
+    :param body: Request body.
+    :format body: str, optional
+
+    :param params: Request params.
+    :format params: str, optional
+
+    :param headers: Request headers.
+    :format headers: str, optional
+
+    :param auth: Request auth.
+    :format auth: str, optional
+
+    :param proxy: Request proxy.
+    :format proxy: str, optional
+
+    :param connection_timeout: Request connection timeout.
+    :format connection_timeout: str, optional
+
+    :param read_timeout: Request read timeout.
+    :format read_timeout: str, optional
+
+    :param extract: Request extract.
+    :format extract: str, optional
+
+    :param response_content_type: Request response content type.
+    :format response_content_type: str, optional
+
+    """
+
     scheme: Optional[str] = "http"
     host: Optional[str] = None
     port: Optional[int] = None
@@ -79,18 +179,48 @@ class HttpRequest(BaseResource):
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class Http(BaseResource):
+    """
+    Watch HTTP object
+
+    :param request: Http Request object
+    :type request: HttpRequest
+    """
+
     request: HttpRequest
 
 
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class Chain(BaseResource):
+    """
+    Watch Chain
+
+    :param inputs: Input parameters
+    :type inputs: list
+    """
+
     inputs: list
 
 
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class Input(BaseResource):
+    """Watch Input
+
+    :param simple: Optiona dict of simple inputs
+    :type simple: dict
+
+    :param search: Optional Search input
+    :type search: Search
+
+    :param http: Optional HTTP input
+    :type http: Http
+
+    :param chain: Optional Chain input
+    :type chain: Chain
+
+    """
+
     simple: Optional[dict] = None
     search: Optional[Search] = None
     http: Optional[Http] = None
@@ -100,6 +230,27 @@ class Input(BaseResource):
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class Condition(BaseResource):
+    """
+    Watch Condition.
+
+
+    :param always: Always condition
+    :type always: dict, optional
+
+    :param never: Never Condition
+    :type always: dict, optional
+
+    :param compare: Compare Condition
+    :type always: dict, optional
+
+    :param array_compare: Array compare Condition
+    :type always: dict, optional
+
+    :param script: Script Condition
+    :type always: dict, optional
+
+    """
+
     always: Optional[dict] = None
     never: Optional[dict] = None
     compare: Optional[dict] = None
@@ -110,6 +261,53 @@ class Condition(BaseResource):
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class EmailAction(BaseResource):
+    """
+    Watch Email Action
+
+    :param id: Email action id
+    :type id: str
+
+    :param account: Email account to use
+    :type account: str
+
+    :param profile: email profile to use
+    :type profile: str
+
+    :param to: List of email addresses to send too
+    :type to: list
+
+    :param cc: List of email addresses to cc
+    :type cc: list
+
+    :param bcc: List of email addresses to bcc
+    :type bcc: list
+
+    :param reply_to: Reply to address
+    :type reply_to: list
+
+    :param _from: Who the email is from
+    :type _from: str
+
+    :param subject: Email subject
+    :type subject: str
+
+    :param body: Email body
+    :type body: str
+
+    :param body_text: Email body text
+    :type body_text: str
+
+    :param body_html: email body html
+    :type body_html: str
+
+    :param priority: Priory
+    :type priority: str
+
+    :param attachments: email attachments
+    :type attachments: str
+
+    """
+
     id: str
     account: str
     profile: str
@@ -129,6 +327,35 @@ class EmailAction(BaseResource):
 @enforce_types
 @dataclass(repr=False, frozen=True)
 class Watch(BaseResource):
+    """
+    Elasticsearch Watch
+
+    :param watch_id: watch id
+    :type watch_id: str
+
+    :param trigger:  Watch trigger
+    :type trigger: Trigger
+
+    :param input:  Watch input
+    :type input: Input
+
+    :param condition:  Watch condition
+    :type condition: Condition
+
+    :param actions:  Watch actions to perform
+    :type actions: dict
+
+    :param metadata: Optional metadata for the watch.
+    :type metadata: dict, optional
+
+    :param throttle_period: Optional throttle period
+    :type throttle_period: int, optional
+
+    :param throttle_period_in_millis: Optional throttle period in milliseconds.
+    :type throttle_period_in_millis: int, optional
+
+    """
+
     watch_id: str
     trigger: Trigger
     input: Input
@@ -150,7 +377,13 @@ class Watch(BaseResource):
     @classmethod
     def get(cls, client, watch_id):
         """
-        Get a watch from Elasticsearch
+        Get a Watcher from Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        :param name: Index template name
+        :type name: str
         """
         try:
             rt = client.watcher.get_watch(id=watch_id)
@@ -167,16 +400,37 @@ class Watch(BaseResource):
         return role
 
     def create(self, client):
+        """
+        Create a watcher in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         try:
             return client.watcher.put_watch(id=self.id, body=self.asdict())
         except Exception as e:
             raise e
 
     def delete(self, client):
+        """
+        Delete a watcher in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         try:
             return client.watcher.delete_watch(id=self.id)
         except Exception as e:
             raise e
 
     def update(self, client):
+        """
+        Update a watcher in Elasticsearch
+
+        :param client: Elasticsearch Client
+        :type client: :py:mod:`Elasticsearch`
+
+        """
         return self.create(client)

@@ -52,3 +52,9 @@ Transform
 
 .. automodule:: nemesis.resources.elasticsearch.transform
   :members:
+
+Watcher
+---------
+
+.. automodule:: nemesis.resources.elasticsearch.watcher
+  :members:
