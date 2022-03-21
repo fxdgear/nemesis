@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nemesis"
-version = "0.0.8"
+version = "0.0.9"
 description = "Tool for managing Elasticsearch resources as code"
 authors = ["Nick Lang <nick@nicklang.com>"]
 include = ["nemesis/templates/*.tmpl"]
