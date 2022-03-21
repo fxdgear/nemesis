@@ -65,6 +65,7 @@ class Pivot(BaseResource):
 
     aggregations: dict
     group_by: dict
+    max_page_search_size: Optional[int] = None
 
 
 @enforce_types

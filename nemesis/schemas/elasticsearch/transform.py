@@ -41,6 +41,7 @@ class LatestSchema(Schema):
 class PivotSchema(Schema):
     aggregations = fields.Dict()
     group_by = fields.Dict()
+    max_page_search_size = fields.Integer()
 
 
 class DestSchema(Schema):
